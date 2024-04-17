@@ -7,239 +7,779 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <table id="map-battleship">
-      <caption>Battleship Map</caption>  
-      <thead>
-        <th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-        </th>
-      </thead>
-      <tbody>
-        <tr>
-            <th>A</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>B</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>C</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>D</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>E</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>F</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>G</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>H</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>I</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-        <tr>
-            <th>J</th>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-            <td class="ship-area"></td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-        <caption>Port of War</caption>
-        <thead>
-            <th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-            </th>
-          </thead>
-        <tbody>
-            <tr>
-                <th>A</th>
-                <td class="ship" id="player_sub" draggable="true">SUB</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>B</th>
-                <td class="ship" id="player_destroyer_pt_1" draggable="true">DES</td>
-                <td class="ship" id="player_destroyer_pt_2" draggable="true">TROYER</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>C</th>
-                <td class="ship" id="player_cruiser_pt_1" draggable="true">CRU</td>
-                <td class="ship" id="player_cruiser_pt_2" draggable="true">I</td>
-                <td class="ship" id="player_cruiser_pt_3" draggable="true">SER</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>D</th>
-                <td class="ship" id="player_warship_pt_1" draggable="true">W</td>
-                <td class="ship" id="player_warship_pt_2" draggable="true">A</td>
-                <td class="ship" id="player_warship_pt_3" draggable="true">R</td>
-                <td class="ship" id="player_warship_pt_4" draggable="true">SHIP</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>E</th>
-                <td class="ship" id="player_aircraft_carrier_pt_1" draggable="true">AIR</td>
-                <td class="ship" id="player_aircraft_carrier_pt_2" draggable="true">CRAFT</td>
-                <td class="ship" id="player_aircraft_carrier_pt_3" draggable="true">CAR</td>
-                <td class="ship" id="player_aircraft_carrier_pt_4" draggable="true">RI</td>
-                <td class="ship" id="player_aircraft_carrier_pt_5" draggable="true">ER</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <section class="game">
+        <section id="player_area">
+            <table id="player_map_battleship">
+              <caption>Yours Ships on the Map</caption>  
+              <thead>
+                <th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                    <th>A</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>B</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>D</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>E</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>G</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>I</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+                <tr>
+                    <th>J</th>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                    <td class="ship-area"></td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="player_port_of_war">
+                <caption>Port of War</caption>
+                <thead>
+                    <th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                    </th>
+                  </thead>
+                <tbody>
+                    <tr>
+                        <th>A</th>
+                        <td class="ship" id="player_sub" draggable="true">SUB</td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                    </tr>
+                    <tr>
+                        <th>B</th>
+                        <td class="ship" id="player_destroyer_pt_1" draggable="true">DES</td>
+                        <td class="ship" id="player_destroyer_pt_2" draggable="true">TROYER</td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                        <td class="ship-area"></td>
+                    </tr>
+                    <tr>
+                        <th>C</th>
+                        <td class="ship" id="player_cruiser_pt_1" draggable="true">CRU</td>
+                        <td class="ship" id="player_cruiser_pt_2" draggable="true">I</td>
+                        <td class="ship" id="player_cruiser_pt_3" draggable="true">SER</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>D</th>
+                        <td class="ship" id="player_warship_pt_1" draggable="true">W</td>
+                        <td class="ship" id="player_warship_pt_2" draggable="true">A</td>
+                        <td class="ship" id="player_warship_pt_3" draggable="true">R</td>
+                        <td class="ship" id="player_warship_pt_4" draggable="true">SHIP</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>E</th>
+                        <td class="ship" id="player_aircraft_carrier_pt_1" draggable="true">AIR</td>
+                        <td class="ship" id="player_aircraft_carrier_pt_2" draggable="true">CRAFT</td>
+                        <td class="ship" id="player_aircraft_carrier_pt_3" draggable="true">CAR</td>
+                        <td class="ship" id="player_aircraft_carrier_pt_4" draggable="true">RI</td>
+                        <td class="ship" id="player_aircraft_carrier_pt_5" draggable="true">ER</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!-- <section id="battle_area">
+            <table id="player_map_attack">
+                <caption>Player Attack Area</caption>  
+                <thead>
+                  <th>
+                      <th>1</th>
+                      <th>2</th>
+                      <th>3</th>
+                      <th>4</th>
+                      <th>5</th>
+                      <th>6</th>
+                      <th>7</th>
+                      <th>8</th>
+                      <th>9</th>
+                      <th>10</th>
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                      <th>A</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>B</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>C</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>D</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>E</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>F</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>G</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>H</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>I</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>J</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                </tbody>
+            </table>
+            <table id="enemy_map_attack">
+                <caption>Enemy Attack Area</caption>  
+                <thead>
+                  <th>
+                      <th>1</th>
+                      <th>2</th>
+                      <th>3</th>
+                      <th>4</th>
+                      <th>5</th>
+                      <th>6</th>
+                      <th>7</th>
+                      <th>8</th>
+                      <th>9</th>
+                      <th>10</th>
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                      <th>A</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>B</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>C</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>D</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>E</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>F</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>G</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>H</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>I</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <th>J</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                </tbody>
+            </table>
+        </section> -->
+        <section id="enemy_area">
+            <table id="enemy_map_battleship">
+              <caption>Enemy Ships on the Map</caption>  
+              <thead>
+                <th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                    <th>A</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>B</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>D</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>E</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>G</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>I</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+                <tr>
+                    <th>J</th>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                    <td class="ship-enemy-area"></td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="player_port_of_war">
+                <caption>Enemy Port of War</caption>
+                <thead>
+                    <th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                    </th>
+                  </thead>
+                <tbody>
+                    <tr>
+                        <th>A</th>
+                        <td class="enemy-ship" id="enemy_sub" draggable="true">SUB</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>B</th>
+                        <td class="enemy-ship enemy-destroyer" id="enemy_destroyer_pt_1" draggable="true">DES</td>
+                        <td class="enemy-ship enemy-destroyer" id="enemy_destroyer_pt_2" draggable="true">TROYER</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>C</th>
+                        <td class="enemy-ship enemy_cruiser" id="enemy_cruiser_pt_1" draggable="true">CRU</td>
+                        <td class="enemy-ship enemy_cruiser" id="enemy_cruiser_pt_2" draggable="true">I</td>
+                        <td class="enemy-ship enemy_cruiser" id="enemy_cruiser_pt_3" draggable="true">SER</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>D</th>
+                        <td class="enemy-ship enemy_warship" id="enemy_warship_pt_1" draggable="true">W</td>
+                        <td class="enemy-ship enemy_warship" id="enemy_warship_pt_2" draggable="true">A</td>
+                        <td class="enemy-ship enemy_warship" id="enemy_warship_pt_3" draggable="true">R</td>
+                        <td class="enemy-ship enemy_warship" id="enemy_warship_pt_4" draggable="true">SHIP</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>E</th>
+                        <td class="enemy-ship enemy_aircraft_carrier" id="enemy_aircraft_carrier_pt_1" draggable="true">AIR</td>
+                        <td class="enemy-ship enemy_aircraft_carrier" id="enemy_aircraft_carrier_pt_2" draggable="true">CRAFT</td>
+                        <td class="enemy-ship enemy_aircraft_carrier" id="enemy_aircraft_carrier_pt_3" draggable="true">CAR</td>
+                        <td class="enemy-ship enemy_aircraft_carrier" id="enemy_aircraft_carrier_pt_4" draggable="true">RI</td>
+                        <td class="enemy-ship enemy_aircraft_carrier" id="enemy_aircraft_carrier_pt_5" draggable="true">ER</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </section>
+    <section class="enemy_area"></section>
     <script src="assets/js/game.js"></script>
 </body>
 </html>
