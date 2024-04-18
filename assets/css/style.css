@@ -50,16 +50,16 @@ td {
   border: dashed 3px red;
 }
 
-.player-attack {
+.attack-area {
   cursor: pointer;
   transition: ease-in 0.1s;
 }
 
-.player-attack:hover {
+.attack-area:hover {
   background-color: yellow;
 }
 
-.player-attack:active {
-    background-color: tomato;
-    transform: scale(1.5);
+.attack-area:active {
+  background-color: tomato;
+  transform: scale(1.5);
 }
