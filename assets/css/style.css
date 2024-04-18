@@ -7,6 +7,9 @@
 
 body {
   background-color: #ddd;
+  /* background-image: url(https://th.bing.com/th/id/R.f585138320f6251c0b6ac6f05f240219?rik=ryOlVCnV052RwA&pid=ImgRaw&r=0); */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game {
@@ -19,7 +22,7 @@ body {
 th,
 td {
   border: 1px solid black;
-  width: 50px;
+  width: 55px;
   height: 30px;
   text-align: center;
   background-color: black;

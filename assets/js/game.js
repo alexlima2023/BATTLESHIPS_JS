@@ -1,6 +1,10 @@
 //VARIABLES
 let difficulty = '';
 let lvl = 0;
+let victoryPlayerArray = [];
+let victoryEnemyArray = [];
+let playerMoves = [];
+let enemyMoves = [];
 
 //GRIDS
 const shipArea = document.querySelectorAll('.ship-area');
@@ -134,14 +138,19 @@ function deployEnemyShips(difficulty) {
   if (difficulty === 'easy') {
     //Pick up level from the object.
     const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
+    victoryPlayerArray = arr;
     //Function to created the ships in the table.
     arr.forEach((el, index) => {
-      enemyShipsArray[index].style.opacity = '0';
+      enemyShipsArray[index].style.opacity = '1';
+      // enemyShipsArray[index].style.width = '10px';
+      // enemyShipsArray[index].style.height = '10px';
+      // enemyShipsArray[index].style.position = 'relative';
       enemyShipArea[el].append(enemyShipsArray[index]);
     });
   }
   if (difficulty === 'medium') {
     const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
+    victoryPlayerArray = arr;
     arr.forEach((el, index) =>
       enemyShipArea[el].append(enemyShipsArray[index]),
     );
@@ -149,33 +158,46 @@ function deployEnemyShips(difficulty) {
 
   if (difficulty === 'hard') {
     const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
+    victoryPlayerArray = arr;
     arr.forEach((el, index) =>
       enemyShipArea[el].append(enemyShipsArray[index]),
     );
   }
 }
 
-deployEnemyShips('easy');
-
 playerAreaAttack.forEach((el, index) =>
   el.addEventListener('click', () => {
-    attackEnemyShip(index);
-    attackPlayerShip();
+    playerAttackEnemyShip(index);
+    enemyAttackPlayerShip();
   }),
 );
 
 //Function mark "X" when it hits a target and mark "O" when it hits the water.
-function attackEnemyShip(position) {
+function playerAttackEnemyShip(position) {
+  playerMoves.push(position);
+  if (conditionVictory(playerMoves, victoryPlayerArray)) {
+    alert('Player Wins');
+  }
+  playerAreaAttack[position].style.backgroundColor = 'tomato';
+  // alert(`You attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, enemyShipArea)) {
-    alert(`You attacked the position: ${position}.`);
+    // enemyShipArea[position].style.backgroundColor = 'yellow';
     return enemyShipArea[position].append('O');
   }
+  // enemyShipArea[position].style.backgroundColor = 'tomato';
   return enemyShipArea[position].append('X');
 }
 
-function attackPlayerShip() {
+let clickEvent = new Event('click');
+
+function enemyAttackPlayerShip() {
   let position = randomNumber();
-  alert(`Enemy attacked the position: ${position}.`);
+  enemyMoves.push(position);
+  if (conditionVictory(enemyMoves, victoryEnemyArray)) {
+    alert('Enemy Wins');
+  }
+  enemyAreaAttack[position].style.backgroundColor = 'tomato';
+  // alert(`Enemy attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, shipArea)) {
     return shipArea[position].append('O');
   }
@@ -185,4 +207,12 @@ function attackPlayerShip() {
 function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
-console.log(randomNumber());
+
+deployEnemyShips('medium');
+
+//Victory function: verifies that all elements of the ships' array are included within the motion array.
+function conditionVictory(arrMoves, arrCondition) {
+  return arrCondition.every(function (element) {
+    return arrMoves.includes(element);
+  });
+}
