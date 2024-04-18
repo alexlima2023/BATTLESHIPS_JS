@@ -5,12 +5,19 @@ let victoryPlayerArray = [];
 let victoryEnemyArray = [];
 let playerMoves = [];
 let enemyMoves = [];
+let playerShipsArray = [];
 
 //GRIDS
 const shipArea = document.querySelectorAll('.ship-area');
 const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
 const playerAreaAttack = document.querySelectorAll('.player-attack');
 const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
+const playerPortArea = document.querySelectorAll('.port-area');
+const battleArena = document.querySelector('#battle-area');
+
+//BUTTONS
+const buttonPlay = document.querySelector('#play');
+const buttonRules = document.querySelector('#rules');
 
 //PLAYER SHIPS
 const playerShips = document.querySelectorAll('.ship');
@@ -77,6 +84,13 @@ const levels = {
   },
 };
 
+playerAreaAttack.forEach((el, index) =>
+  el.addEventListener('click', () => {
+    playerAttackEnemyShip(index);
+    enemyAttackPlayerShip();
+  }),
+);
+
 //CREATED SHIP DRAG AND DROP - START
 {
   playerShips.forEach((ship) => {
@@ -112,6 +126,7 @@ const levels = {
   }
 
   function drop(e) {
+    // console.log(e.target);
     e.target.classList.remove('drag-over');
     const id = e.dataTransfer.getData('text/plain');
     const draggable = document.getElementById(id);
@@ -165,13 +180,6 @@ function deployEnemyShips(difficulty) {
   }
 }
 
-playerAreaAttack.forEach((el, index) =>
-  el.addEventListener('click', () => {
-    playerAttackEnemyShip(index);
-    enemyAttackPlayerShip();
-  }),
-);
-
 //Function mark "X" when it hits a target and mark "O" when it hits the water.
 function playerAttackEnemyShip(position) {
   playerMoves.push(position);
@@ -188,14 +196,13 @@ function playerAttackEnemyShip(position) {
   return enemyShipArea[position].append('X');
 }
 
-let clickEvent = new Event('click');
-
 function enemyAttackPlayerShip() {
   let position = randomNumber();
   enemyMoves.push(position);
-  if (conditionVictory(enemyMoves, victoryEnemyArray)) {
-    alert('Enemy Wins');
-  }
+  //Needs to create condition
+  // if (conditionVictory(enemyMoves, victoryEnemyArray)) {
+  //   alert('Enemy Wins');
+  // }
   enemyAreaAttack[position].style.backgroundColor = 'tomato';
   // alert(`Enemy attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, shipArea)) {
@@ -208,11 +215,32 @@ function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
-deployEnemyShips('medium');
+// deployEnemyShips('easy');
 
 //Victory function: verifies that all elements of the ships' array are included within the motion array.
 function conditionVictory(arrMoves, arrCondition) {
   return arrCondition.every(function (element) {
     return arrMoves.includes(element);
   });
+}
+buttonPlay.addEventListener('click', checkPlayerShipsAreReady);
+
+//Function to validate that all ships are ready to battle
+function checkPlayerShipsAreReady() {
+  let count = 0;
+  shipArea.forEach((el, index) => {
+    if (!checkPositionIsEmpty(index, shipArea)) {
+      count++;
+    }
+  });
+
+  console.log(count);
+
+  if (count === 29) {
+    alert('Ready to game!');
+    battleArena.classList.remove('hidden');
+    deployEnemyShips('easy');
+  } else {
+    alert('Correctly position your ships! If you need read the rules.');
+  }
 }

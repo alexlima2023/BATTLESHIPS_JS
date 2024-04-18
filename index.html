@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <section class="game">
+    <header>
+        <section class="instructions">
+            <button id="play">Play</button>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+            <select id="level">
+                <option value="_01">1</option>
+                <option value="_02">2</option>
+                <option value="_03">3</option>
+            </select>
+            <button id="rules">Rules</button>
+        </section>
+    </header>
+    <main class="game">
         <section id="player_area">
             <table id="player_map_battleship">
               <caption>Yours Ships on the Map</caption>  
@@ -178,72 +194,72 @@
                     <tr>
                         <th>A</th>
                         <td class="ship" id="player_sub" draggable="true">SUB</td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
                     </tr>
                     <tr>
                         <th>B</th>
-                        <td class="ship" id="player_destroyer_pt_1" draggable="true">DES</td>
-                        <td class="ship" id="player_destroyer_pt_2" draggable="true">TROYER</td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
-                        <td class="ship-area"></td>
+                        <td class="ship ship-area port-area" id="player_destroyer_pt_1" draggable="true">DES</td>
+                        <td class="ship ship-area port-area" id="player_destroyer_pt_2" draggable="true">TROYER</td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
                     </tr>
                     <tr>
                         <th>C</th>
-                        <td class="ship" id="player_cruiser_pt_1" draggable="true">CRU</td>
-                        <td class="ship" id="player_cruiser_pt_2" draggable="true">I</td>
-                        <td class="ship" id="player_cruiser_pt_3" draggable="true">SER</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="ship ship-area port-area" id="player_cruiser_pt_1" draggable="true">CRU</td>
+                        <td class="ship ship-area port-area" id="player_cruiser_pt_2" draggable="true">I</td>
+                        <td class="ship ship-area port-area" id="player_cruiser_pt_3" draggable="true">SER</td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
                     </tr>
                     <tr>
                         <th>D</th>
-                        <td class="ship" id="player_warship_pt_1" draggable="true">W</td>
-                        <td class="ship" id="player_warship_pt_2" draggable="true">A</td>
-                        <td class="ship" id="player_warship_pt_3" draggable="true">R</td>
-                        <td class="ship" id="player_warship_pt_4" draggable="true">SHIP</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="ship ship-area port-area" id="player_warship_pt_1" draggable="true">W</td>
+                        <td class="ship ship-area port-area" id="player_warship_pt_2" draggable="true">A</td>
+                        <td class="ship ship-area port-area" id="player_warship_pt_3" draggable="true">R</td>
+                        <td class="ship ship-area port-area" id="player_warship_pt_4" draggable="true">SHIP</td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
                     </tr>
                     <tr>
                         <th>E</th>
-                        <td class="ship" id="player_aircraft_carrier_pt_1" draggable="true">AIR</td>
-                        <td class="ship" id="player_aircraft_carrier_pt_2" draggable="true">CRAFT</td>
-                        <td class="ship" id="player_aircraft_carrier_pt_3" draggable="true">CAR</td>
-                        <td class="ship" id="player_aircraft_carrier_pt_4" draggable="true">RI</td>
-                        <td class="ship" id="player_aircraft_carrier_pt_5" draggable="true">ER</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="ship ship-area port-area" id="player_aircraft_carrier_pt_1" draggable="true">AIR</td>
+                        <td class="ship ship-area port-area" id="player_aircraft_carrier_pt_2" draggable="true">CRAFT</td>
+                        <td class="ship ship-area port-area" id="player_aircraft_carrier_pt_3" draggable="true">CAR</td>
+                        <td class="ship ship-area port-area" id="player_aircraft_carrier_pt_4" draggable="true">RI</td>
+                        <td class="ship ship-area port-area" id="player_aircraft_carrier_pt_5" draggable="true">ER</td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
+                        <td class="ship-area port-area"></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-        <section id="battle_area">
+        <section id="battle-area" class="hidden">
             <table id="player_map_attack">
                 <caption>Player Attack Area</caption>  
                 <thead>
@@ -778,7 +794,11 @@
                 </tbody>
             </table>
         </section>
-    </section>
+    </main>
+    <footer>
+        <p>Developed by: Alexandre Lima</p>
+        <p>All rights reserved.</p>
+    </footer>
     <section class="enemy_area"></section>
     <script src="assets/js/game.js"></script>
 </body>

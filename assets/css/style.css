@@ -12,8 +12,36 @@ body {
   background-size: cover;
 }
 
+header,
+footer {
+  height: 5vh;
+  background-color: cornflowerblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p {
+  text-align: center;
+  color: white;
+  font-family: monospace;
+}
+
+.instructions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instructions > button {
+  padding: 10px 5px;
+  margin: 2px 5px;
+  cursor: pointer;
+}
+
 .game {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -31,6 +59,10 @@ td {
 
 td {
   background-color: steelblue;
+}
+
+.hidden {
+  display: none;
 }
 
 .ship,
