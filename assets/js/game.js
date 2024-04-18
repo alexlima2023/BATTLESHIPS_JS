@@ -1,4 +1,4 @@
-//VARIABLES
+//GLOBAL VARIABLES
 let difficulty = '';
 let lvl = 0;
 let victoryPlayerArray = [];
@@ -9,10 +9,13 @@ let playerShipsArray = [];
 
 //GRIDS
 const shipArea = document.querySelectorAll('.ship-area');
-const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
 const playerAreaAttack = document.querySelectorAll('.player-attack');
-const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
 const playerPortArea = document.querySelectorAll('.port-area');
+const sectionPlayerPortArea = document.querySelector('#player_port_of_war');
+const playerMapBattle = document.querySelectorAll('.map-battle');
+const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
+const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
+const sectionEnemyPortArea = document.querySelector('#enemy-port-of-war');
 const battleArena = document.querySelector('#battle-area');
 
 //BUTTONS
@@ -84,6 +87,16 @@ const levels = {
   },
 };
 
+// SOUNDS
+let dragAndDropSound = new Audio();
+let explosionSound = new Audio();
+let pewPewSound = new Audio();
+dragAndDropSound.src = 'assets/sounds/mine.mp3';
+explosionSound.src = 'assets/sounds/explosion.mp3';
+pewPewSound.src = 'assets/sounds/pew-pew.mp3';
+
+buttonPlay.addEventListener('click', checkPlayerShipsAreReady);
+
 playerAreaAttack.forEach((el, index) =>
   el.addEventListener('click', () => {
     playerAttackEnemyShip(index);
@@ -127,6 +140,7 @@ playerAreaAttack.forEach((el, index) =>
 
   function drop(e) {
     // console.log(e.target);
+    dragAndDropSound.play();
     e.target.classList.remove('drag-over');
     const id = e.dataTransfer.getData('text/plain');
     const draggable = document.getElementById(id);
@@ -190,9 +204,11 @@ function playerAttackEnemyShip(position) {
   // alert(`You attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, enemyShipArea)) {
     // enemyShipArea[position].style.backgroundColor = 'yellow';
+    pewPewSound.play();
     return enemyShipArea[position].append('O');
   }
   // enemyShipArea[position].style.backgroundColor = 'tomato';
+  explosionSound.play();
   return enemyShipArea[position].append('X');
 }
 
@@ -200,9 +216,9 @@ function enemyAttackPlayerShip() {
   let position = randomNumber();
   enemyMoves.push(position);
   //Needs to create condition
-  // if (conditionVictory(enemyMoves, victoryEnemyArray)) {
-  //   alert('Enemy Wins');
-  // }
+  if (conditionVictory(enemyMoves, victoryEnemyArray)) {
+    alert('Enemy Wins');
+  }
   enemyAreaAttack[position].style.backgroundColor = 'tomato';
   // alert(`Enemy attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, shipArea)) {
@@ -215,32 +231,51 @@ function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
-// deployEnemyShips('easy');
-
 //Victory function: verifies that all elements of the ships' array are included within the motion array.
 function conditionVictory(arrMoves, arrCondition) {
   return arrCondition.every(function (element) {
     return arrMoves.includes(element);
   });
 }
-buttonPlay.addEventListener('click', checkPlayerShipsAreReady);
 
 //Function to validate that all ships are ready to battle
 function checkPlayerShipsAreReady() {
   let count = 0;
-  shipArea.forEach((el, index) => {
-    if (!checkPositionIsEmpty(index, shipArea)) {
+  playerMapBattle.forEach((el, index) => {
+    if (!checkPositionIsEmpty(index, playerMapBattle)) {
       count++;
+      victoryEnemyArray.push(index);
     }
   });
 
-  console.log(count);
-
-  if (count === 29) {
+  if (count === 15) {
     alert('Ready to game!');
     battleArena.classList.remove('hidden');
+    sectionPlayerPortArea.classList.add('hidden');
+    sectionEnemyPortArea.classList.add('hidden');
     deployEnemyShips('easy');
   } else {
     alert('Correctly position your ships! If you need read the rules.');
+    count = 0;
+    victoryEnemyArray = [];
   }
 }
+
+//EXTRA
+//Atomic Bomb, destroy all player's ships.
+function enemyAtomicBombAttack() {
+  for (let i = 0; i < 100; i++) {
+    enemyMoves.push(i);
+    enemyAreaAttack[i].style.backgroundColor = 'tomato';
+    if (checkPositionIsEmpty(i, shipArea)) {
+      shipArea[i].append('O');
+    } else {
+      shipArea[i].append('X');
+    }
+  }
+  if (conditionVictory(enemyMoves, victoryEnemyArray)) {
+    alert('Enemy Wins');
+  }
+}
+
+function positionMyShips() {}

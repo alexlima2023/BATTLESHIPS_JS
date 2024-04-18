@@ -86,7 +86,7 @@ td {
 }
 
 .attack-area {
-  cursor: pointer;
+  cursor: crosshair;
   transition: ease-in 0.1s;
 }
 
