@@ -5,6 +5,7 @@ let lvl = 0;
 //GRIDS
 const shipArea = document.querySelectorAll(".ship-area");
 const enemyShipArea = document.querySelectorAll(".ship-enemy-area");
+const playerAreaAttack = document.querySelectorAll(".player-attack");
 
 //PLAYER SHIPS
 const playerShips = document.querySelectorAll(".ship");
@@ -125,28 +126,42 @@ function checkPositionIsEmpty(pos) {
   if (!enemyShipArea[pos].textContent.trim()) {
     return true;
   }
-}
-
-//Function to generate a random number into 0 - 99.
-function randomCellPosition() {
-  return Math.floor(Math.random() * 100);
+  return false;
 }
 
 function deployEnemyShips(difficulty) {
   if (difficulty === "easy") {
-    let lvl = 0;
-    //Function to get Levels.
-    // const arr = Object.values(Object.entries(levels)[0][1])[0];
+    //Pick up level from the object.
+    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
     //Function to created the ships in the table.
-    // arr.forEach((el, index) => enemyShipArea[el].append(enemyShipsArray[index]));
+    arr.forEach((el, index) => {
+        enemyShipsArray[index].style.opacity = "0";
+        enemyShipArea[el].append(enemyShipsArray[index])
+    });
   }
   if (difficulty === "medium") {
-    Object.entries(levels)[1]
+    const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
+    arr.forEach((el, index) => enemyShipArea[el].append(enemyShipsArray[index]));
   }
 
   if (difficulty === "hard") {
-    Object.entries(levels)[2]
+    const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
+    arr.forEach((el, index) => enemyShipArea[el].append(enemyShipsArray[index]));
   }
 }
 
 deployEnemyShips("easy");
+console.log(checkPositionIsEmpty(0));
+console.log(checkPositionIsEmpty(1));
+
+playerAreaAttack.forEach((el, index) => el.addEventListener("click",() => {
+  attackEnemyShip(index);
+}))
+
+//Function mark "X" when it hits a target and mark "O" when it hits the water.
+function attackEnemyShip(pos) {
+  if(checkPositionIsEmpty(pos)){
+    return enemyShipArea[pos].append("O");
+  } 
+  return enemyShipArea[pos].append("X");
+}

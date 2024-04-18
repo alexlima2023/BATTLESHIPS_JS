@@ -1,44 +1,65 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
-    background-color: #DDD;
+  background-color: #ddd;
 }
 
 .game {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-th, td {
-    border: 1px solid black;
-    width: 50px;
-    height: 30px;
-    text-align: center;
+th,
+td {
+  border: 1px solid black;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  background-color: black;
+  color: white;
 }
 
-.ship, .enemy-ship {
-    cursor: pointer;
-    background-color: #7353BA;
-    color: white;
-    font-size: 0.6rem;
+td {
+  background-color: steelblue;
+}
+
+.ship,
+.enemy-ship {
+  cursor: pointer;
+  background-color: #7353ba;
+  color: white;
+  font-size: 0.6rem;
 }
 
 .enemy-ship {
-    background-color: tomato;
-    color: black;
+  background-color: rgb(195, 77, 56);
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .drag-over {
-    border: dashed 3px red;
+  border: dashed 3px red;
+}
+
+.player-attack {
+  cursor: pointer;
+  transition: ease-in 0.1s;
+}
+
+.player-attack:hover {
+  background-color: yellow;
+}
+
+.player-attack:active {
+    background-color: tomato;
+    transform: scale(1.5);
 }
