@@ -1,5 +1,6 @@
 //GLOBAL VARIABLES
-let difficulty = '';
+
+let difficulty = 'easy';
 let lvl = 0;
 let victoryPlayerArray = [];
 let victoryEnemyArray = [];
@@ -8,6 +9,7 @@ let enemyMoves = [];
 let playerShipsArray = [];
 
 //GRIDS
+
 const shipArea = document.querySelectorAll('.ship-area');
 const playerAreaAttack = document.querySelectorAll('.player-attack');
 const playerPortArea = document.querySelectorAll('.port-area');
@@ -19,14 +21,16 @@ const sectionEnemyPortArea = document.querySelector('#enemy-port-of-war');
 const battleArena = document.querySelector('#battle-area');
 
 //BUTTONS
+
 const buttonPlay = document.querySelector('#play');
 const buttonRules = document.querySelector('#rules');
+const sectionDifficulty = document.querySelectorAll('#difficulty');
 
 //PLAYER SHIPS
 const playerShips = Array.from(document.querySelectorAll('.ship'));
-// playerShips.forEach((el) => console.log(el));
 
 //ENEMY SHIPS
+
 const enemySub = Array.from(document.querySelectorAll('#enemy_sub'));
 const [enemyDestroyer1, enemyDestroyer2] = Array.from(
   document.querySelectorAll('.enemy-destroyer'),
@@ -89,6 +93,7 @@ const levels = {
 };
 
 // SOUNDS
+
 let dragAndDropSound = new Audio();
 let explosionSound = new Audio();
 let pewPewSound = new Audio();
@@ -96,7 +101,31 @@ dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
 
+// GAME
+
 buttonPlay.addEventListener('click', startGame);
+buttonRules.addEventListener('click', () =>
+  alert(
+    `Objective: The objective of Battleship is to sink all of your opponent's ships before they sink yours.
+    1. Setup: Each player has a game board with two grids: one for placing their own ships and one for recording their 
+    opponent's shots. Players must place their ships on the grid without the opponent seeing where they are located.
+    2. Ships: Each player has a fleet of ships, typically consisting of the following:
+    Aircraft Carrier (5 squares)
+    Battleship (4 squares)
+    Cruiser (3 squares)
+    Destroyer (2 squares)
+    Submarine (1 squares)
+    3. Taking Turns: Players take turns calling out coordinates to attempt to "hit" their opponent's ships. Coordinates 
+    are specified by a letter (indicating the row) and a number (indicating the column).
+    4. Hit or Miss: If a player calls out a coordinate that contains a part of an opponent's ship, it's a "hit." If the 
+    coordinate does not contain any part of a ship, it's a "miss." Players mark their opponent's grid accordingly.
+    5. Sinking Ships: When all of the squares of a ship have been hit, the ship is considered "sunk." The player must 
+    announce which ship has been sunk.
+    6. Winning the Game: The game continues until one player has successfully sunk all of their opponent's ships. That 
+    player is declared the winner.
+    `,
+  ),
+);
 
 playerAreaAttack.forEach((el, index) =>
   el.addEventListener('click', () => {
@@ -104,6 +133,10 @@ playerAreaAttack.forEach((el, index) =>
     enemyAttackPlayerShip();
   }),
 );
+
+sectionDifficulty[0].addEventListener('change', function (e) {
+  difficulty = e.target.value;
+});
 
 //CREATED SHIP DRAG AND DROP - START
 {
@@ -185,26 +218,25 @@ function deployEnemyShips(difficulty) {
     //Function to created the ships in the table.
     arr.forEach((el, index) => {
       enemyShipsArray[index].style.opacity = '0';
-      // enemyShipsArray[index].style.width = '10px';
-      // enemyShipsArray[index].style.height = '10px';
-      // enemyShipsArray[index].style.position = 'relative';
       enemyShipArea[el].append(enemyShipsArray[index]);
     });
   }
   if (difficulty === 'medium') {
     const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
     victoryPlayerArray = arr;
-    arr.forEach((el, index) =>
-      enemyShipArea[el].append(enemyShipsArray[index]),
-    );
+    arr.forEach((el, index) => {
+      enemyShipsArray[index].style.opacity = '0';
+      enemyShipArea[el].append(enemyShipsArray[index]);
+    });
   }
 
   if (difficulty === 'hard') {
     const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
     victoryPlayerArray = arr;
-    arr.forEach((el, index) =>
-      enemyShipArea[el].append(enemyShipsArray[index]),
-    );
+    arr.forEach((el, index) => {
+      enemyShipsArray[index].style.opacity = '0';
+      enemyShipArea[el].append(enemyShipsArray[index]);
+    });
   }
 }
 
@@ -223,7 +255,6 @@ function playerAttackEnemyShip(position) {
   O.innerText = 'O';
   O.classList.add('absolute');
 
-  // alert(`You attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, enemyShipArea)) {
     enemyShipArea[position].style.backgroundColor = 'blue';
     pewPewSound.play();
@@ -236,8 +267,10 @@ function playerAttackEnemyShip(position) {
 
 function enemyAttackPlayerShip() {
   let position = randomNumber();
+  while (enemyMoves.includes(position)) {
+    return enemyAttackPlayerShip();
+  }
   enemyMoves.push(position);
-  //Needs to create condition
   if (conditionVictory(enemyMoves, victoryEnemyArray)) {
     alert('Enemy Wins');
   }
@@ -250,7 +283,6 @@ function enemyAttackPlayerShip() {
   X.classList.add('absolute');
 
   enemyAreaAttack[position].style.backgroundColor = 'tomato';
-  // alert(`Enemy attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, shipArea)) {
     shipArea[position].style.backgroundColor = 'blue';
     return shipArea[position].append(O);
@@ -286,7 +318,7 @@ function startGame() {
     battleArena.classList.remove('hidden');
     sectionPlayerPortArea.classList.add('hidden');
     sectionEnemyPortArea.classList.add('hidden');
-    deployEnemyShips('easy');
+    deployEnemyShips(difficulty);
   } else {
     alert('Correctly position your ships! If you need read the rules.');
     count = 0;

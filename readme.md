@@ -6,7 +6,7 @@
 
 ## Requirements 🛠️🖥️
 
-- <input type="checkbox" checked>Create Warport Table for Player and Computer.
+- <input type="checkbox" checked>Create port of War Table for Player and Computer.
 - <input type="checkbox" checked>Create Ships Area Table for Player and Computer.
 - <input type="checkbox" checked>Drag and drop effect for the positioning of the player's ships.
 - <input type="checkbox" checked>Player Attack Table.
@@ -23,6 +23,7 @@
 - <input type="checkbox" checked> Create Enemy Win Rule
 - <input type="checkbox" checked> Function to read the positions of the player's ships and check if all ships are affixed.
 - <input type="checkbox" checked> Add sounds to the game.
+- <input type="checkbox" checked> Correcting shots in the water and on ships with Position Relative and Absolute.
 
 ## Print 📸
 
