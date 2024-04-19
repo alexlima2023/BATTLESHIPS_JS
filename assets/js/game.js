@@ -23,7 +23,8 @@ const buttonPlay = document.querySelector('#play');
 const buttonRules = document.querySelector('#rules');
 
 //PLAYER SHIPS
-const playerShips = document.querySelectorAll('.ship');
+const playerShips = Array.from(document.querySelectorAll('.ship'));
+// playerShips.forEach((el) => console.log(el));
 
 //ENEMY SHIPS
 const enemySub = Array.from(document.querySelectorAll('#enemy_sub'));
@@ -95,7 +96,7 @@ dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
 
-buttonPlay.addEventListener('click', checkPlayerShipsAreReady);
+buttonPlay.addEventListener('click', startGame);
 
 playerAreaAttack.forEach((el, index) =>
   el.addEventListener('click', () => {
@@ -112,6 +113,7 @@ playerAreaAttack.forEach((el, index) =>
 
   function dragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.id);
+    e.target.style.opacity = '0.5';
     setTimeout(() => {
       e.target.classList.add('hide');
     }, 0);
@@ -163,6 +165,18 @@ function checkPositionIsEmpty(pos, arr) {
   return false;
 }
 
+//Support function for positioning the player's ships
+function deployPlayerShips() {
+  playerShips.forEach((el, index) => {
+    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
+    arr.forEach((el, index) => {
+      playerShips[index].style.opacity = '0.5';
+      shipArea[el].append(playerShips[index]);
+    });
+  });
+}
+
+////Support function for positioning the enemy's ships
 function deployEnemyShips(difficulty) {
   if (difficulty === 'easy') {
     //Pick up level from the object.
@@ -170,7 +184,7 @@ function deployEnemyShips(difficulty) {
     victoryPlayerArray = arr;
     //Function to created the ships in the table.
     arr.forEach((el, index) => {
-      enemyShipsArray[index].style.opacity = '1';
+      enemyShipsArray[index].style.opacity = '0';
       // enemyShipsArray[index].style.width = '10px';
       // enemyShipsArray[index].style.height = '10px';
       // enemyShipsArray[index].style.position = 'relative';
@@ -201,15 +215,23 @@ function playerAttackEnemyShip(position) {
     alert('Player Wins');
   }
   playerAreaAttack[position].style.backgroundColor = 'tomato';
+  const X = document.createElement('div');
+  X.innerText = 'X';
+  X.classList.add('absolute');
+
+  const O = document.createElement('div');
+  O.innerText = 'O';
+  O.classList.add('absolute');
+
   // alert(`You attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, enemyShipArea)) {
-    // enemyShipArea[position].style.backgroundColor = 'yellow';
+    enemyShipArea[position].style.backgroundColor = 'blue';
     pewPewSound.play();
-    return enemyShipArea[position].append('O');
+    return enemyShipArea[position].append(O);
   }
-  // enemyShipArea[position].style.backgroundColor = 'tomato';
+  enemyShipArea[position].style.backgroundColor = 'tomato';
   explosionSound.play();
-  return enemyShipArea[position].append('X');
+  return enemyShipArea[position].append(X);
 }
 
 function enemyAttackPlayerShip() {
@@ -219,12 +241,22 @@ function enemyAttackPlayerShip() {
   if (conditionVictory(enemyMoves, victoryEnemyArray)) {
     alert('Enemy Wins');
   }
+  const O = document.createElement('div');
+  O.innerText = 'O';
+  O.classList.add('absolute');
+
+  const X = document.createElement('div');
+  X.innerText = 'X';
+  X.classList.add('absolute');
+
   enemyAreaAttack[position].style.backgroundColor = 'tomato';
   // alert(`Enemy attacked the position: ${position}.`);
   if (checkPositionIsEmpty(position, shipArea)) {
-    return shipArea[position].append('O');
+    shipArea[position].style.backgroundColor = 'blue';
+    return shipArea[position].append(O);
   }
-  return shipArea[position].append('X');
+  shipArea[position].style.backgroundColor = 'tomato';
+  return shipArea[position].append(X);
 }
 
 function randomNumber() {
@@ -239,8 +271,9 @@ function conditionVictory(arrMoves, arrCondition) {
 }
 
 //Function to validate that all ships are ready to battle
-function checkPlayerShipsAreReady() {
+function startGame() {
   let count = 0;
+  // deployPlayerShips();
   playerMapBattle.forEach((el, index) => {
     if (!checkPositionIsEmpty(index, playerMapBattle)) {
       count++;
@@ -277,5 +310,3 @@ function enemyAtomicBombAttack() {
     alert('Enemy Wins');
   }
 }
-
-function positionMyShips() {}

@@ -77,6 +77,20 @@ td {
   background-color: rgb(195, 77, 56);
 }
 
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  content: '';
+  width: 55px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+
 .hide {
   display: none;
 }
@@ -97,4 +111,5 @@ td {
 .attack-area:active {
   background-color: tomato;
   transform: scale(1.5);
+  z-index: 2;
 }
