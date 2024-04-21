@@ -61,6 +61,11 @@ td {
   background-color: steelblue;
 }
 
+.border {
+  background-color: tomato;
+  padding: 10px;
+}
+
 .hidden {
   display: none;
 }

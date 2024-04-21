@@ -7,8 +7,12 @@ let victoryEnemyArray = [];
 let playerMoves = [];
 let enemyMoves = [];
 let playerShipsArray = [];
+let playerMissedShots = 0;
+let playerTargetShots = 0;
+let enemyMissedShots = 0;
+let enemyTargetShots = 0;
 
-//GRIDS
+//GRIDS and HTML ELEMENTS
 
 const shipArea = document.querySelectorAll('.ship-area');
 const playerAreaAttack = document.querySelectorAll('.player-attack');
@@ -19,6 +23,10 @@ const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
 const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
 const sectionEnemyPortArea = document.querySelector('#enemy-port-of-war');
 const battleArena = document.querySelector('#battle-area');
+const playerShotsScreen = document.querySelector('#player-shots');
+const playerTargetShotsScreen = document.querySelector('#player-target-shots');
+const enemyShotsScreen = document.querySelector('#enemy-shots');
+const enemyTargetShotsScreen = document.querySelector('#enemy-target-shots');
 
 //BUTTONS
 
@@ -139,54 +147,54 @@ sectionDifficulty[0].addEventListener('change', function (e) {
 });
 
 //CREATED SHIP DRAG AND DROP - START
-{
-  playerShips.forEach((ship) => {
-    ship.addEventListener('dragstart', dragStart);
-  });
 
-  function dragStart(e) {
-    e.dataTransfer.setData('text/plain', e.target.id);
-    e.target.style.opacity = '0.5';
-    setTimeout(() => {
-      e.target.classList.add('hide');
-    }, 0);
-  }
+playerShips.forEach((ship) => {
+  ship.addEventListener('dragstart', dragStart);
+});
 
-  shipArea.forEach((area) => {
-    area.addEventListener('dragenter', dragEnter);
-    area.addEventListener('dragover', dragOver);
-    area.addEventListener('dragleave', dragLeave);
-    area.addEventListener('drop', drop);
-  });
-
-  function dragEnter(e) {
-    e.preventDefault();
-    e.target.classList.add('drag-over');
-  }
-
-  function dragOver(e) {
-    e.preventDefault();
-    e.target.classList.add('drag-over');
-  }
-
-  function dragLeave(e) {
-    e.target.classList.remove('drag-over');
-  }
-
-  function drop(e) {
-    // console.log(e.target);
-    dragAndDropSound.play();
-    e.target.classList.remove('drag-over');
-    const id = e.dataTransfer.getData('text/plain');
-    const draggable = document.getElementById(id);
-
-    // add it to the drop target
-    e.target.appendChild(draggable);
-
-    // display the draggable element
-    draggable.classList.remove('hide');
-  }
+function dragStart(e) {
+  e.dataTransfer.setData('text/plain', e.target.id);
+  e.target.style.opacity = '0.5';
+  setTimeout(() => {
+    e.target.classList.add('hide');
+  }, 0);
 }
+
+shipArea.forEach((area) => {
+  area.addEventListener('dragenter', dragEnter);
+  area.addEventListener('dragover', dragOver);
+  area.addEventListener('dragleave', dragLeave);
+  area.addEventListener('drop', drop);
+});
+
+function dragEnter(e) {
+  e.preventDefault();
+  e.target.classList.add('drag-over');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.target.classList.add('drag-over');
+}
+
+function dragLeave(e) {
+  e.target.classList.remove('drag-over');
+}
+
+function drop(e) {
+  // console.log(e.target);
+  dragAndDropSound.play();
+  e.target.classList.remove('drag-over');
+  const id = e.dataTransfer.getData('text/plain');
+  const draggable = document.getElementById(id);
+
+  // add it to the drop target
+  e.target.appendChild(draggable);
+
+  // display the draggable element
+  draggable.classList.remove('hide');
+}
+
 //CREATED SHIP DRAG AND DROP - END
 
 //Function to check if the position is empty!
@@ -256,10 +264,12 @@ function playerAttackEnemyShip(position) {
   O.classList.add('absolute');
 
   if (checkPositionIsEmpty(position, enemyShipArea)) {
+    countShots('playerMissedShot');
     enemyShipArea[position].style.backgroundColor = 'blue';
     pewPewSound.play();
     return enemyShipArea[position].append(O);
   }
+  countShots('playerTargetShot');
   enemyShipArea[position].style.backgroundColor = 'tomato';
   explosionSound.play();
   return enemyShipArea[position].append(X);
@@ -267,6 +277,7 @@ function playerAttackEnemyShip(position) {
 
 function enemyAttackPlayerShip() {
   let position = randomNumber();
+  // Make sure the computer doesn't attack the same position
   while (enemyMoves.includes(position)) {
     return enemyAttackPlayerShip();
   }
@@ -284,9 +295,12 @@ function enemyAttackPlayerShip() {
 
   enemyAreaAttack[position].style.backgroundColor = 'tomato';
   if (checkPositionIsEmpty(position, shipArea)) {
+    countShots('enemyMissedShot');
     shipArea[position].style.backgroundColor = 'blue';
     return shipArea[position].append(O);
   }
+  countShots('enemyTargetShot');
+
   shipArea[position].style.backgroundColor = 'tomato';
   return shipArea[position].append(X);
 }
@@ -323,6 +337,25 @@ function startGame() {
     alert('Correctly position your ships! If you need read the rules.');
     count = 0;
     victoryEnemyArray = [];
+  }
+}
+
+function countShots(target) {
+  if (target === 'playerMissedShot') {
+    playerMissedShots++;
+    playerShotsScreen.textContent = playerMissedShots;
+  }
+  if (target === 'playerTargetShot') {
+    playerTargetShots++;
+    playerTargetShotsScreen.textContent = playerTargetShots;
+  }
+  if (target === 'enemyMissedShot') {
+    enemyMissedShots++;
+    enemyShotsScreen.textContent = enemyMissedShots;
+  }
+  if (target === 'enemyTargetShot') {
+    enemyTargetShots++;
+    enemyTargetShotsScreen.textContent = enemyTargetShots;
   }
 }
 

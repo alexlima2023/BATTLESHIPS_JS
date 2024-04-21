@@ -24,8 +24,10 @@
         </section>
     </header>
     <main class="game">
-        <section id="player_area">
-            <table id="player_map_battleship">
+        <section id="player-area" >
+            <h3>Shots: <span id="player-shots">0</span></h3>
+            <h3>Target Shots: <span id="player-target-shots">0</span></h3>
+            <table id="player-map-battleship">
               <caption>Yours Ships on the Map</caption>  
               <thead>
                 <th>
@@ -559,7 +561,9 @@
                 </tbody>
             </table>
         </section>
-        <section id="enemy_area">
+        <section id="enemy-area" >
+            <h3>Shots: <span id="enemy-shots">0</span></h3>
+            <h3>Target Shots: <span id="enemy-target-shots">0</span></h3>
             <table id="enemy_map_battleship">
               <caption>Enemy Ships on the Map</caption>  
               <thead>
@@ -799,7 +803,6 @@
         <p>Developed by: Alexandre Lima</p>
         <p>All rights reserved.</p>
     </footer>
-    <section class="enemy_area"></section>
     <script src="assets/js/game.js"></script>
 </body>
 </html>
