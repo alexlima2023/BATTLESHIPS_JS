@@ -2,15 +2,17 @@
 
 let difficulty = 'easy';
 let lvl = 0;
+let playerMissedShots = 0;
+let playerTargetShots = 0;
+let enemyMissedShots = 0;
+let enemyTargetShots = 0;
 let victoryPlayerArray = [];
 let victoryEnemyArray = [];
 let playerMoves = [];
 let enemyMoves = [];
 let playerShipsArray = [];
-let playerMissedShots = 0;
-let playerTargetShots = 0;
-let enemyMissedShots = 0;
-let enemyTargetShots = 0;
+let clickHandlers = [];
+let soundIsActive = true;
 
 //GRIDS and HTML ELEMENTS
 
@@ -33,6 +35,8 @@ const enemyTargetShotsScreen = document.querySelector('#enemy-target-shots');
 const buttonPlay = document.querySelector('#play');
 const buttonRules = document.querySelector('#rules');
 const sectionDifficulty = document.querySelectorAll('#difficulty');
+const soundConfig = document.querySelector('#sound-config');
+const resetButton = document.querySelector('#reset');
 
 //PLAYER SHIPS
 const playerShips = Array.from(document.querySelectorAll('.ship'));
@@ -88,15 +92,9 @@ const levels = {
     _01: [11, 23, 33, 50, 60, 70, 16, 17, 18, 19, 83, 84, 85, 86, 87],
     _02: [55, 0, 1, 77, 87, 97, 41, 51, 61, 71, 28, 38, 48, 58, 68],
     _03: [19, 85, 86, 11, 12, 13, 32, 42, 52, 62, 6, 16, 26, 36, 46],
-    _04: [],
-    _05: [],
   },
   hard: {
-    _01: [],
-    _02: [],
-    _03: [],
-    _04: [],
-    _05: [],
+    _01: [90, 83, 93, 23, 14, 5, 38, 48, 58, 68, 20, 31, 42, 53, 64],
   },
 };
 
@@ -107,13 +105,27 @@ let explosionSound = new Audio();
 let pewPewSound = new Audio();
 let music = new Audio();
 music.loop = true;
+music.volume = 0.1;
 
 music.src = 'assets/sounds/music.mp3';
 dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
 
-music.play();
+// music.play();
+
+soundConfig.addEventListener('click', handleSound);
+
+function handleSound() {
+  if (soundIsActive) {
+    music.pause();
+    soundConfig.innerText = 'SOUND: OFF';
+  } else {
+    music.play();
+    soundConfig.innerText = 'SOUND: ON';
+  }
+  soundIsActive = !soundIsActive;
+}
 
 // GAME
 
@@ -141,8 +153,7 @@ buttonRules.addEventListener('click', () =>
   ),
 );
 
-const clickHandlers = [];
-
+//Adding and Removing Click Events
 playerAreaAttack.forEach((el, index) => {
   const clickHandler = addClickEvent.bind(null, el, index);
   el.addEventListener('click', clickHandler);
@@ -155,13 +166,11 @@ function addClickEvent(el, index) {
   removeClickEvent(el, index);
 }
 
-// Para remover os eventos
 function removeClickEvent(el, index) {
   playerAreaAttack[index].removeEventListener('click', clickHandlers[index]);
 }
 
-//criar função nomeada, se clicou autoremove
-
+//Choosing the Difficulty
 sectionDifficulty[0].addEventListener('change', function (e) {
   difficulty = e.target.value;
 });
@@ -235,6 +244,30 @@ function deployPlayerShips() {
       shipArea[el].append(playerShips[index]);
     });
   });
+}
+
+function randomNumber() {
+  return Math.floor(Math.random() * 100);
+}
+
+function createHorizontalEasyLevel() {
+  // A -> [0,   1,  2,  3,  4,  5,  6,  7,  8,  9]
+  // B -> [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  // C -> [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+  // D -> [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+  // E -> [40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+  // F -> [50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+  // G -> [60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
+  // H -> [70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+  // I -> [80, 81, 82, 83, 84, 85, x, 87, 88, 89]
+  // J -> [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
+  //sub - Free
+  //destroyer - Block ->   [9, 19, 29, 39, 49, 59, 69, 79, 89, 99]
+  //cruiser -   Block ->   [8, 18, 28, 38, 48, 58, 68, 78, 88, 98]
+  //warship     Block ->   [7, 17, 27, 37, 47, 57, 67, 77, 87, 97]
+  //aircraft    Block ->   [6, 16, 26, 36, 46, 56, 66, 76, 86, 96]
+  //posiciono o submarino, excluo toda a linha do array de posições possiveis e as posições bloqueadas do proximo barco.
+  //enemyShipArea[el].append(enemyShipsArray[index]);
 }
 
 ////Support function for positioning the enemy's ships
@@ -325,10 +358,6 @@ function enemyAttackPlayerShip() {
   return shipArea[position].append(X);
 }
 
-function randomNumber() {
-  return Math.floor(Math.random() * 100);
-}
-
 //Victory function: verifies that all elements of the ships' array are included within the motion array.
 function conditionVictory(arrMoves, arrCondition) {
   return arrCondition.every(function (element) {
@@ -396,3 +425,13 @@ function enemyAtomicBombAttack() {
     alert('Enemy Wins');
   }
 }
+
+// let arr = [90, 83, 93, 23, 14, 5, 38, 48, 58, 68, 20, 31, 42, 53, 64];
+for (let i = 0; i < 100; i++) {
+  enemyShipArea[i].textContent = i;
+}
+
+// arr.forEach((el, index) => {
+//   enemyShipsArray[index].style.opacity = '1';
+//   enemyShipArea[el].append(enemyShipsArray[index]);
+// });
