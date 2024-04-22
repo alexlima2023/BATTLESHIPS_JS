@@ -105,9 +105,13 @@ const levels = {
 let dragAndDropSound = new Audio();
 let explosionSound = new Audio();
 let pewPewSound = new Audio();
+let music = new Audio();
+music.src = 'assets/sounds/music.mp3';
 dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
+
+music.play();
 
 // GAME
 

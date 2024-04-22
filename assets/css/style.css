@@ -2,12 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   background-color: #ddd;
-  /* background-image: url(https://th.bing.com/th/id/R.f585138320f6251c0b6ac6f05f240219?rik=ryOlVCnV052RwA&pid=ImgRaw&r=0); */
+  background-image: url(https://wallpaperaccess.com/full/4029954.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -16,6 +16,7 @@ header,
 footer {
   height: 5vh;
   background-color: cornflowerblue;
+  opacity: 0.7;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +72,7 @@ td {
 }
 
 .flex {
-  max-width: 230px;
+  max-width: 275px;
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
@@ -93,6 +94,14 @@ td {
 
 .target {
   background-color: tomato;
+}
+
+.color-white {
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .ship,
