@@ -70,6 +70,31 @@ td {
   display: none;
 }
 
+.flex {
+  max-width: 230px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.shot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  color: white;
+  width: 55px;
+  height: 30px;
+}
+
+.missed {
+  background-color: blue;
+}
+
+.target {
+  background-color: tomato;
+}
+
 .ship,
 .enemy-ship {
   cursor: pointer;

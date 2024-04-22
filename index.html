@@ -25,8 +25,14 @@
     </header>
     <main class="game">
         <section id="player-area" >
-            <h3>Shots: <span id="player-shots">0</span></h3>
-            <h3>Target Shots: <span id="player-target-shots">0</span></h3>
+            <div class="flex">
+                <h3>Missed Shots: <span id="player-shots">0</span></h3>
+                <div class="shot missed">O</div>
+            </div>
+            <div class="flex">
+                <h3>Target Shots: <span id="player-target-shots">0</span> </h3>
+                <div class="shot target">X</div>
+            </div>            
             <table id="player-map-battleship">
               <caption>Yours Ships on the Map</caption>  
               <thead>
@@ -281,7 +287,7 @@
                 <tbody>
                   <tr>
                       <th>A</th>
-                      <td class="attack-area player-attack relative"></td>
+                      <td class="attack-area player-attack relative" readonly></td>
                       <td class="attack-area player-attack relative"></td>
                       <td class="attack-area player-attack relative"></td>
                       <td class="attack-area player-attack relative"></td>
@@ -562,8 +568,14 @@
             </table>
         </section>
         <section id="enemy-area" >
-            <h3>Shots: <span id="enemy-shots">0</span></h3>
-            <h3>Target Shots: <span id="enemy-target-shots">0</span></h3>
+            <div class="flex">
+                <h3>Missed Shots: <span id="enemy-shots">0</span></h3>
+                <div class="shot missed">O</div>
+            </div>
+            <div class="flex">
+                <h3>Target Shots: <span id="enemy-target-shots">0</span></h3>
+                <div class="shot target">X</div>
+            </div>
             <table id="enemy_map_battleship">
               <caption>Enemy Ships on the Map</caption>  
               <thead>

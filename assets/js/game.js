@@ -135,12 +135,26 @@ buttonRules.addEventListener('click', () =>
   ),
 );
 
-playerAreaAttack.forEach((el, index) =>
-  el.addEventListener('click', () => {
-    playerAttackEnemyShip(index);
-    enemyAttackPlayerShip();
-  }),
-);
+const clickHandlers = [];
+
+playerAreaAttack.forEach((el, index) => {
+  const clickHandler = addClickEvent.bind(null, el, index);
+  el.addEventListener('click', clickHandler);
+  clickHandlers.push(clickHandler);
+});
+
+function addClickEvent(el, index) {
+  playerAttackEnemyShip(index);
+  enemyAttackPlayerShip();
+  removeClickEvent(el, index);
+}
+
+// Para remover os eventos
+function removeClickEvent(el, index) {
+  playerAreaAttack[index].removeEventListener('click', clickHandlers[index]);
+}
+
+//criar função nomeada, se clicou autoremove
 
 sectionDifficulty[0].addEventListener('change', function (e) {
   difficulty = e.target.value;
@@ -340,6 +354,7 @@ function startGame() {
   }
 }
 
+//Function to count shots and missed shots.
 function countShots(target) {
   if (target === 'playerMissedShot') {
     playerMissedShots++;
