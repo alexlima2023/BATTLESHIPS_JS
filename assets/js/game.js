@@ -106,6 +106,8 @@ let dragAndDropSound = new Audio();
 let explosionSound = new Audio();
 let pewPewSound = new Audio();
 let music = new Audio();
+music.loop = true;
+
 music.src = 'assets/sounds/music.mp3';
 dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';

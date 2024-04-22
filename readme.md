@@ -29,6 +29,8 @@
 - <input type="checkbox"> Create Game Restart System.
 - <input type="checkbox"> Create Random Ship Position Generation.
 - <input type="checkbox"> Remove permission to drag ships after starting the game.
+- <input type="checkbox"> Better computer intelligence at the medium and hard level
+- <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox" checked> Add Music and Sounds.
 
 ## Print 📸
