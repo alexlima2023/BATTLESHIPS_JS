@@ -12,6 +12,87 @@ let playerMoves = [];
 let enemyMoves = [];
 let playerShipsArray = [];
 let clickHandlers = [];
+const destroyerBlockCellsHorizontal = [9, 19, 29, 39, 49, 59, 69, 79, 89, 99];
+const cruiserBlockCellsHorizontal = [
+  ...destroyerBlockCellsHorizontal,
+  8,
+  18,
+  28,
+  38,
+  48,
+  58,
+  68,
+  78,
+  88,
+  98,
+];
+const warshipBlockCellsHorizontal = [
+  ...cruiserBlockCellsHorizontal,
+  7,
+  17,
+  27,
+  37,
+  47,
+  57,
+  67,
+  77,
+  87,
+  97,
+];
+const aircraftBlockCellsHorizontal = [
+  ...warshipBlockCellsHorizontal,
+  6,
+  16,
+  26,
+  36,
+  46,
+  56,
+  66,
+  76,
+  86,
+  96,
+];
+const destroyerBlockCellsVertical = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
+const cruiserBlockCellsVertical = [
+  ...destroyerBlockCellsVertical,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+];
+const warshipBlockCellsVertical = [
+  ...cruiserBlockCellsVertical,
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+];
+const aircraftBlockCellsVertical = [
+  ...warshipBlockCellsVertical,
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+];
+
 let soundIsActive = true;
 
 //GRIDS and HTML ELEMENTS
@@ -105,14 +186,14 @@ let explosionSound = new Audio();
 let pewPewSound = new Audio();
 let music = new Audio();
 music.loop = true;
-music.volume = 0.1;
+music.volume = 0.03;
 
 music.src = 'assets/sounds/music.mp3';
 dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
 
-// music.play();
+music.play();
 
 soundConfig.addEventListener('click', handleSound);
 
@@ -251,25 +332,96 @@ function randomNumber() {
 }
 
 function createHorizontalEasyLevel() {
-  // A -> [0,   1,  2,  3,  4,  5,  6,  7,  8,  9]
-  // B -> [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-  // C -> [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
-  // D -> [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
-  // E -> [40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
-  // F -> [50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
-  // G -> [60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
-  // H -> [70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
-  // I -> [80, 81, 82, 83, 84, 85, x, 87, 88, 89]
-  // J -> [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
-  //sub - Free
-  //destroyer - Block ->   [9, 19, 29, 39, 49, 59, 69, 79, 89, 99]
-  //cruiser -   Block ->   [8, 18, 28, 38, 48, 58, 68, 78, 88, 98]
-  //warship     Block ->   [7, 17, 27, 37, 47, 57, 67, 77, 87, 97]
-  //aircraft    Block ->   [6, 16, 26, 36, 46, 56, 66, 76, 86, 96]
-  //posiciono o submarino, excluo toda a linha do array de posições possiveis e as posições bloqueadas do proximo barco.
-  //enemyShipArea[el].append(enemyShipsArray[index]);
+  setSub();
+  setDestroyer();
+  setCruiser();
+  setWarShip();
+  setAircraft();
 }
 
+function setSub() {
+  let index = randomNumber();
+
+  if (checkPositionIsEmpty(index, enemyShipArea)) {
+    enemyShipArea[index].append(enemySub[0]);
+    return true;
+  }
+  return setSub();
+}
+
+function setDestroyer() {
+  let index = randomNumber();
+  if (
+    checkPositionIsEmpty(index, enemyShipArea) &&
+    checkPositionIsEmpty(index + 1, enemyShipArea) &&
+    !destroyerBlockCellsHorizontal.includes(index)
+  ) {
+    enemyShipArea[index].append(enemyDestroyer1);
+    enemyShipArea[index + 1].append(enemyDestroyer2);
+    return true;
+  }
+  return setDestroyer();
+}
+
+function setCruiser() {
+  let index = randomNumber();
+  if (
+    checkPositionIsEmpty(index, enemyShipArea) &&
+    checkPositionIsEmpty(index + 1, enemyShipArea) &&
+    checkPositionIsEmpty(index + 2, enemyShipArea) &&
+    !cruiserBlockCellsHorizontal.includes(index) &&
+    !destroyerBlockCellsHorizontal.includes(index)
+  ) {
+    enemyShipArea[index].append(enemyCruiser1);
+    enemyShipArea[index + 1].append(enemyCruiser2);
+    enemyShipArea[index + 2].append(enemyCruiser3);
+    return true;
+  }
+  return setCruiser();
+}
+
+function setWarShip() {
+  let index = randomNumber();
+  if (
+    checkPositionIsEmpty(index, enemyShipArea) &&
+    checkPositionIsEmpty(index + 1, enemyShipArea) &&
+    checkPositionIsEmpty(index + 2, enemyShipArea) &&
+    checkPositionIsEmpty(index + 3, enemyShipArea) &&
+    !warshipBlockCellsHorizontal.includes(index) &&
+    !cruiserBlockCellsHorizontal.includes(index) &&
+    !destroyerBlockCellsHorizontal.includes(index)
+  ) {
+    enemyShipArea[index].append(enemyWarship1);
+    enemyShipArea[index + 1].append(enemyWarship2);
+    enemyShipArea[index + 2].append(enemyWarship3);
+    enemyShipArea[index + 3].append(enemyWarship4);
+    return true;
+  }
+  return setWarShip();
+}
+
+function setAircraft() {
+  let index = randomNumber();
+  if (
+    checkPositionIsEmpty(index, enemyShipArea) &&
+    checkPositionIsEmpty(index + 1, enemyShipArea) &&
+    checkPositionIsEmpty(index + 2, enemyShipArea) &&
+    checkPositionIsEmpty(index + 3, enemyShipArea) &&
+    checkPositionIsEmpty(index + 4, enemyShipArea) &&
+    !aircraftBlockCellsHorizontal.includes(index) &&
+    !warshipBlockCellsHorizontal.includes(index) &&
+    !cruiserBlockCellsHorizontal.includes(index) &&
+    !destroyerBlockCellsHorizontal.includes(index)
+  ) {
+    enemyShipArea[index].append(enemyAircraftCarrier1);
+    enemyShipArea[index + 1].append(enemyAircraftCarrier2);
+    enemyShipArea[index + 2].append(enemyAircraftCarrier3);
+    enemyShipArea[index + 3].append(enemyAircraftCarrier4);
+    enemyShipArea[index + 4].append(enemyAircraftCarrier5);
+    return true;
+  }
+  return setAircraft();
+}
 ////Support function for positioning the enemy's ships
 function deployEnemyShips(difficulty) {
   if (difficulty === 'easy') {
