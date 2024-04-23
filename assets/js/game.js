@@ -331,12 +331,17 @@ function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
-function createHorizontalEasyLevel() {
-  setSub();
-  setDestroyer();
-  setCruiser();
-  setWarShip();
-  setAircraft();
+//Functions to position enemy ships in the map.
+function createEasyLevel() {
+  try {
+    setSub();
+    setDestroyer('vertical');
+    setCruiser('vertical');
+    setWarShip('vertical');
+    setAircraft('vertical');
+  } catch (error) {
+    return createEasyLevel();
+  }
 }
 
 function setSub() {
@@ -349,78 +354,142 @@ function setSub() {
   return setSub();
 }
 
-function setDestroyer() {
+function setDestroyer(position) {
   let index = randomNumber();
-  if (
-    checkPositionIsEmpty(index, enemyShipArea) &&
-    checkPositionIsEmpty(index + 1, enemyShipArea) &&
-    !destroyerBlockCellsHorizontal.includes(index)
-  ) {
-    enemyShipArea[index].append(enemyDestroyer1);
-    enemyShipArea[index + 1].append(enemyDestroyer2);
-    return true;
+  if (position === 'horizontal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 1, enemyShipArea) &&
+      !destroyerBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyDestroyer1);
+      enemyShipArea[index + 1].append(enemyDestroyer2);
+      return true;
+    }
+    return setDestroyer('horizontal');
   }
-  return setDestroyer();
+
+  if (position === 'vertical') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 10, enemyShipArea) &&
+      !destroyerBlockCellsVertical.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyDestroyer1);
+      enemyShipArea[index + 10].append(enemyDestroyer2);
+      return true;
+    }
+    return setDestroyer('vertical');
+  }
 }
 
-function setCruiser() {
+function setCruiser(position) {
   let index = randomNumber();
-  if (
-    checkPositionIsEmpty(index, enemyShipArea) &&
-    checkPositionIsEmpty(index + 1, enemyShipArea) &&
-    checkPositionIsEmpty(index + 2, enemyShipArea) &&
-    !cruiserBlockCellsHorizontal.includes(index) &&
-    !destroyerBlockCellsHorizontal.includes(index)
-  ) {
-    enemyShipArea[index].append(enemyCruiser1);
-    enemyShipArea[index + 1].append(enemyCruiser2);
-    enemyShipArea[index + 2].append(enemyCruiser3);
-    return true;
+  if (position === 'horizontal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 1, enemyShipArea) &&
+      checkPositionIsEmpty(index + 2, enemyShipArea) &&
+      !cruiserBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyCruiser1);
+      enemyShipArea[index + 1].append(enemyCruiser2);
+      enemyShipArea[index + 2].append(enemyCruiser3);
+      return true;
+    }
+    return setCruiser('horizontal');
   }
-  return setCruiser();
+  if (position === 'vertical') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 10, enemyShipArea) &&
+      checkPositionIsEmpty(index + 20, enemyShipArea) &&
+      !cruiserBlockCellsVertical.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyCruiser1);
+      enemyShipArea[index + 10].append(enemyCruiser2);
+      enemyShipArea[index + 20].append(enemyCruiser3);
+      return true;
+    }
+    return setCruiser('vertical');
+  }
 }
 
-function setWarShip() {
+function setWarShip(position) {
   let index = randomNumber();
-  if (
-    checkPositionIsEmpty(index, enemyShipArea) &&
-    checkPositionIsEmpty(index + 1, enemyShipArea) &&
-    checkPositionIsEmpty(index + 2, enemyShipArea) &&
-    checkPositionIsEmpty(index + 3, enemyShipArea) &&
-    !warshipBlockCellsHorizontal.includes(index) &&
-    !cruiserBlockCellsHorizontal.includes(index) &&
-    !destroyerBlockCellsHorizontal.includes(index)
-  ) {
-    enemyShipArea[index].append(enemyWarship1);
-    enemyShipArea[index + 1].append(enemyWarship2);
-    enemyShipArea[index + 2].append(enemyWarship3);
-    enemyShipArea[index + 3].append(enemyWarship4);
-    return true;
+  if (position === 'horizontal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 1, enemyShipArea) &&
+      checkPositionIsEmpty(index + 2, enemyShipArea) &&
+      checkPositionIsEmpty(index + 3, enemyShipArea) &&
+      !warshipBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyWarship1);
+      enemyShipArea[index + 1].append(enemyWarship2);
+      enemyShipArea[index + 2].append(enemyWarship3);
+      enemyShipArea[index + 3].append(enemyWarship4);
+      return true;
+    }
+    return setWarShip('horizontal');
   }
-  return setWarShip();
+
+  if (position === 'vertical') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 10, enemyShipArea) &&
+      checkPositionIsEmpty(index + 20, enemyShipArea) &&
+      checkPositionIsEmpty(index + 30, enemyShipArea) &&
+      !warshipBlockCellsVertical.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyWarship1);
+      enemyShipArea[index + 10].append(enemyWarship2);
+      enemyShipArea[index + 20].append(enemyWarship3);
+      enemyShipArea[index + 30].append(enemyWarship4);
+      return true;
+    }
+    return setWarShip('vertical');
+  }
 }
 
-function setAircraft() {
+function setAircraft(position) {
   let index = randomNumber();
-  if (
-    checkPositionIsEmpty(index, enemyShipArea) &&
-    checkPositionIsEmpty(index + 1, enemyShipArea) &&
-    checkPositionIsEmpty(index + 2, enemyShipArea) &&
-    checkPositionIsEmpty(index + 3, enemyShipArea) &&
-    checkPositionIsEmpty(index + 4, enemyShipArea) &&
-    !aircraftBlockCellsHorizontal.includes(index) &&
-    !warshipBlockCellsHorizontal.includes(index) &&
-    !cruiserBlockCellsHorizontal.includes(index) &&
-    !destroyerBlockCellsHorizontal.includes(index)
-  ) {
-    enemyShipArea[index].append(enemyAircraftCarrier1);
-    enemyShipArea[index + 1].append(enemyAircraftCarrier2);
-    enemyShipArea[index + 2].append(enemyAircraftCarrier3);
-    enemyShipArea[index + 3].append(enemyAircraftCarrier4);
-    enemyShipArea[index + 4].append(enemyAircraftCarrier5);
-    return true;
+  if (position === 'horizontal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 1, enemyShipArea) &&
+      checkPositionIsEmpty(index + 2, enemyShipArea) &&
+      checkPositionIsEmpty(index + 3, enemyShipArea) &&
+      checkPositionIsEmpty(index + 4, enemyShipArea) &&
+      !aircraftBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyAircraftCarrier1);
+      enemyShipArea[index + 1].append(enemyAircraftCarrier2);
+      enemyShipArea[index + 2].append(enemyAircraftCarrier3);
+      enemyShipArea[index + 3].append(enemyAircraftCarrier4);
+      enemyShipArea[index + 4].append(enemyAircraftCarrier5);
+      return true;
+    }
+    return setAircraft('horizontal');
   }
-  return setAircraft();
+  if (position === 'vertical') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index + 10, enemyShipArea) &&
+      checkPositionIsEmpty(index + 20, enemyShipArea) &&
+      checkPositionIsEmpty(index + 30, enemyShipArea) &&
+      checkPositionIsEmpty(index + 40, enemyShipArea) &&
+      !aircraftBlockCellsVertical.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyAircraftCarrier1);
+      enemyShipArea[index + 10].append(enemyAircraftCarrier2);
+      enemyShipArea[index + 20].append(enemyAircraftCarrier3);
+      enemyShipArea[index + 30].append(enemyAircraftCarrier4);
+      enemyShipArea[index + 40].append(enemyAircraftCarrier5);
+      return true;
+    }
+    return setAircraft('vertical');
+  }
 }
 ////Support function for positioning the enemy's ships
 function deployEnemyShips(difficulty) {
@@ -579,9 +648,9 @@ function enemyAtomicBombAttack() {
 }
 
 // let arr = [90, 83, 93, 23, 14, 5, 38, 48, 58, 68, 20, 31, 42, 53, 64];
-for (let i = 0; i < 100; i++) {
-  enemyShipArea[i].textContent = i;
-}
+// for (let i = 0; i < 100; i++) {
+//   enemyShipArea[i].textContent = i;
+// }
 
 // arr.forEach((el, index) => {
 //   enemyShipsArray[index].style.opacity = '1';
