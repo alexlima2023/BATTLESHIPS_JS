@@ -327,20 +327,49 @@ function deployPlayerShips() {
   });
 }
 
+//Generate random number range: (0-99)
 function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
+function randomDirection() {
+  let number = Math.round(Math.random());
+  console.log(number);
+  let result = number === 1 ? 'vertical' : 'horizontal';
+  return result;
+}
+
 //Functions to position enemy ships in the map.
 function createEasyLevel() {
+  let direction = randomDirection();
   try {
-    setSub();
-    setDestroyer('vertical');
-    setCruiser('vertical');
-    setWarShip('vertical');
-    setAircraft('vertical');
+    if (direction === 'vertical') {
+      setSub();
+      setDestroyer('vertical');
+      setCruiser('vertical');
+      setWarShip('vertical');
+      setAircraft('vertical');
+    } else if (direction === 'horizontal') {
+      setSub();
+      setDestroyer('horizontal');
+      setCruiser('horizontal');
+      setWarShip('horizontal');
+      setAircraft('horizontal');
+    }
   } catch (error) {
     return createEasyLevel();
+  }
+}
+
+function createMediumLevel() {
+  try {
+    setSub();
+    setDestroyer(randomDirection());
+    setCruiser(randomDirection());
+    setWarShip(randomDirection());
+    setAircraft(randomDirection());
+  } catch (error) {
+    return createMediumLevel();
   }
 }
 
@@ -354,9 +383,9 @@ function setSub() {
   return setSub();
 }
 
-function setDestroyer(position) {
+function setDestroyer(direction) {
   let index = randomNumber();
-  if (position === 'horizontal') {
+  if (direction === 'horizontal') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 1, enemyShipArea) &&
@@ -369,7 +398,7 @@ function setDestroyer(position) {
     return setDestroyer('horizontal');
   }
 
-  if (position === 'vertical') {
+  if (direction === 'vertical') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 10, enemyShipArea) &&
@@ -383,9 +412,9 @@ function setDestroyer(position) {
   }
 }
 
-function setCruiser(position) {
+function setCruiser(direction) {
   let index = randomNumber();
-  if (position === 'horizontal') {
+  if (direction === 'horizontal') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 1, enemyShipArea) &&
@@ -399,7 +428,7 @@ function setCruiser(position) {
     }
     return setCruiser('horizontal');
   }
-  if (position === 'vertical') {
+  if (direction === 'vertical') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 10, enemyShipArea) &&
@@ -415,9 +444,9 @@ function setCruiser(position) {
   }
 }
 
-function setWarShip(position) {
+function setWarShip(direction) {
   let index = randomNumber();
-  if (position === 'horizontal') {
+  if (direction === 'horizontal') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 1, enemyShipArea) &&
@@ -434,7 +463,7 @@ function setWarShip(position) {
     return setWarShip('horizontal');
   }
 
-  if (position === 'vertical') {
+  if (direction === 'vertical') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 10, enemyShipArea) &&
@@ -452,9 +481,9 @@ function setWarShip(position) {
   }
 }
 
-function setAircraft(position) {
+function setAircraft(direction) {
   let index = randomNumber();
-  if (position === 'horizontal') {
+  if (direction === 'horizontal') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 1, enemyShipArea) &&
@@ -472,7 +501,7 @@ function setAircraft(position) {
     }
     return setAircraft('horizontal');
   }
-  if (position === 'vertical') {
+  if (direction === 'vertical') {
     if (
       checkPositionIsEmpty(index, enemyShipArea) &&
       checkPositionIsEmpty(index + 10, enemyShipArea) &&
