@@ -92,6 +92,46 @@ const aircraftBlockCellsVertical = [
   68,
   69,
 ];
+const destroyerBlockCellsDiagonal = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cruiserBlockCellsDiagonal = [
+  ...destroyerBlockCellsDiagonal,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+];
+const warshipBlockCellsDiagonal = [
+  ...cruiserBlockCellsDiagonal,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+];
+const aircraftBlockCellsDiagonal = [
+  ...warshipBlockCellsDiagonal,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+];
 
 let soundIsActive = true;
 
@@ -332,9 +372,14 @@ function randomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
-function randomDirection() {
+function randomDirection(difficulty) {
+  if (difficulty === 'hard') {
+    let number = Math.round(Math.random() * 2);
+    let result =
+      number === 2 ? 'diagonal' : number === 1 ? 'vertical' : 'horizontal';
+    return result;
+  }
   let number = Math.round(Math.random());
-  console.log(number);
   let result = number === 1 ? 'vertical' : 'horizontal';
   return result;
 }
@@ -370,6 +415,18 @@ function createMediumLevel() {
     setAircraft(randomDirection());
   } catch (error) {
     return createMediumLevel();
+  }
+}
+
+function createHardLevel() {
+  try {
+    setSub();
+    setDestroyer(randomDirection('hard'));
+    setCruiser(randomDirection('hard'));
+    setWarShip(randomDirection('hard'));
+    setAircraft(randomDirection('hard'));
+  } catch (error) {
+    return createHardLevel();
   }
 }
 
@@ -410,6 +467,20 @@ function setDestroyer(direction) {
     }
     return setDestroyer('vertical');
   }
+
+  if (direction === 'diagonal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index - 9, enemyShipArea) &&
+      !destroyerBlockCellsDiagonal.includes(index) &&
+      !destroyerBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyDestroyer1);
+      enemyShipArea[index - 9].append(enemyDestroyer2);
+      return true;
+    }
+    return setDestroyer('diagonal');
+  }
 }
 
 function setCruiser(direction) {
@@ -441,6 +512,21 @@ function setCruiser(direction) {
       return true;
     }
     return setCruiser('vertical');
+  }
+  if (direction === 'diagonal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index - 9, enemyShipArea) &&
+      checkPositionIsEmpty(index - 18, enemyShipArea) &&
+      !cruiserBlockCellsDiagonal.includes(index) &&
+      !cruiserBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyCruiser1);
+      enemyShipArea[index - 9].append(enemyCruiser2);
+      enemyShipArea[index - 18].append(enemyCruiser3);
+      return true;
+    }
+    return setCruiser('diagonal');
   }
 }
 
@@ -478,6 +564,24 @@ function setWarShip(direction) {
       return true;
     }
     return setWarShip('vertical');
+  }
+
+  if (direction === 'diagonal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index - 9, enemyShipArea) &&
+      checkPositionIsEmpty(index - 18, enemyShipArea) &&
+      checkPositionIsEmpty(index - 27, enemyShipArea) &&
+      !warshipBlockCellsDiagonal.includes(index) &&
+      !warshipBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyWarship1);
+      enemyShipArea[index - 9].append(enemyWarship2);
+      enemyShipArea[index - 18].append(enemyWarship3);
+      enemyShipArea[index - 27].append(enemyWarship4);
+      return true;
+    }
+    return setWarShip('diagonal');
   }
 }
 
@@ -518,6 +622,26 @@ function setAircraft(direction) {
       return true;
     }
     return setAircraft('vertical');
+  }
+
+  if (direction === 'diagonal') {
+    if (
+      checkPositionIsEmpty(index, enemyShipArea) &&
+      checkPositionIsEmpty(index - 9, enemyShipArea) &&
+      checkPositionIsEmpty(index - 18, enemyShipArea) &&
+      checkPositionIsEmpty(index - 27, enemyShipArea) &&
+      checkPositionIsEmpty(index - 36, enemyShipArea) &&
+      !aircraftBlockCellsDiagonal.includes(index) &&
+      !aircraftBlockCellsHorizontal.includes(index)
+    ) {
+      enemyShipArea[index].append(enemyAircraftCarrier1);
+      enemyShipArea[index - 9].append(enemyAircraftCarrier2);
+      enemyShipArea[index - 18].append(enemyAircraftCarrier3);
+      enemyShipArea[index - 27].append(enemyAircraftCarrier4);
+      enemyShipArea[index - 36].append(enemyAircraftCarrier5);
+      return true;
+    }
+    return setAircraft('diagonal');
   }
 }
 ////Support function for positioning the enemy's ships

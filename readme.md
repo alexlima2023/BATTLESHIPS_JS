@@ -26,12 +26,13 @@
 - <input type="checkbox" checked> Correcting shots in the water and on ships with Position Relative and Absolute.
 - <input type="checkbox" checked> Make sure the computer doesn't attack the same position.
 - <input type="checkbox" checked> Make sure the player doesn't attack the same position.
-- <input type="checkbox"> Create Game Restart System.
-- <input type="checkbox"> Create Random Ship Position Generation.
+- <input type="checkbox" checked> Create Random Ship Position Generation (Horizontal and Vertical).
+- <input type="checkbox" > Create Random Ship Position Generation (Diagonal).
+- <input type="checkbox" checked> Add Music and Sounds.
+- <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox"> Remove permission to drag ships after starting the game.
+- <input type="checkbox"> Create Game Restart System.
 - <input type="checkbox"> Better computer intelligence at the medium and hard level
-- <input type="checkbox" checked> Add Music and Sounds.
-- <input type="checkbox" checked> Add Music and Sounds.
 
 ## Print 📸
 
