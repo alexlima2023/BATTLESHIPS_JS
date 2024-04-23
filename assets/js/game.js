@@ -200,25 +200,6 @@ const enemyShipsArray = [
   enemyAircraftCarrier5,
 ];
 
-const levels = {
-  easy: {
-    _01: [0, 15, 25, 41, 51, 61, 57, 67, 77, 87, 9, 19, 29, 39, 49],
-    _02: [17, 78, 88, 10, 20, 30, 2, 12, 22, 32, 50, 60, 70, 80, 90],
-    _03: [99, 76, 86, 11, 21, 31, 5, 15, 25, 35, 44, 54, 64, 74, 84],
-    _04: [3, 32, 33, 91, 92, 93, 6, 7, 8, 9, 50, 51, 52, 53, 54],
-    _05: [76, 48, 49, 20, 21, 22, 14, 15, 16, 17, 80, 81, 82, 83, 84],
-    _06: [99, 1, 2, 66, 67, 68, 6, 7, 8, 9, 90, 91, 92, 93, 94],
-  },
-  medium: {
-    _01: [11, 23, 33, 50, 60, 70, 16, 17, 18, 19, 83, 84, 85, 86, 87],
-    _02: [55, 0, 1, 77, 87, 97, 41, 51, 61, 71, 28, 38, 48, 58, 68],
-    _03: [19, 85, 86, 11, 12, 13, 32, 42, 52, 62, 6, 16, 26, 36, 46],
-  },
-  hard: {
-    _01: [90, 83, 93, 23, 14, 5, 38, 48, 58, 68, 20, 31, 42, 53, 64],
-  },
-};
-
 // SOUNDS
 
 let dragAndDropSound = new Audio();
@@ -304,10 +285,7 @@ playerShips.forEach((ship) => {
 
 function dragStart(e) {
   e.dataTransfer.setData('text/plain', e.target.id);
-  e.target.style.opacity = '0.5';
-  setTimeout(() => {
-    e.target.classList.add('hide');
-  }, 0);
+  // e.target.style.opacity = '0.5';
 }
 
 shipArea.forEach((area) => {
@@ -638,40 +616,18 @@ function setAircraft(direction) {
 }
 ////Support function for positioning the enemy's ships
 function deployEnemyShips(difficulty) {
-  // enemyShipsArray[index].style.opacity = '0';
   enemyShipsArray.forEach((el) => (el.style.opacity = '0'));
   if (difficulty === 'easy') {
     createEasyLevel();
     setVictoryPlayerArray();
-    //Pick up level from the object.
-    // const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
-    // victoryPlayerArray = arr;
-    //Function to created the ships in the table.
-    // arr.forEach((el, index) => {
-    //   enemyShipsArray[index].style.opacity = '0';
-    //   enemyShipArea[el].append(enemyShipsArray[index]);
-    // });
   }
   if (difficulty === 'medium') {
     createMediumLevel();
     setVictoryPlayerArray();
-    // const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
-    // victoryPlayerArray = arr;
-    // arr.forEach((el, index) => {
-    //   enemyShipsArray[index].style.opacity = '0';
-    //   enemyShipArea[el].append(enemyShipsArray[index]);
-    // });
   }
-
   if (difficulty === 'hard') {
     createHardLevel();
     setVictoryPlayerArray();
-    // const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
-    // victoryPlayerArray = arr;
-    // arr.forEach((el, index) => {
-    //   enemyShipsArray[index].style.opacity = '0';
-    //   enemyShipArea[el].append(enemyShipsArray[index]);
-    // });
   }
 }
 
@@ -763,6 +719,11 @@ function startGame() {
     sectionPlayerPortArea.classList.add('hidden');
     sectionEnemyPortArea.classList.add('hidden');
     deployEnemyShips(difficulty);
+    playerShips.forEach((el) => {
+      el.draggable = false;
+      el.style.opacity = '0.5';
+      el.style.cursor = 'not-allowed';
+    });
   } else {
     alert('Correctly position your ships! If you need read the rules.');
     count = 0;
