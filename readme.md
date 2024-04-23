@@ -27,7 +27,7 @@
 - <input type="checkbox" checked> Make sure the computer doesn't attack the same position.
 - <input type="checkbox" checked> Make sure the player doesn't attack the same position.
 - <input type="checkbox" checked> Create Random Ship Position Generation (Horizontal and Vertical).
-- <input type="checkbox" > Create Random Ship Position Generation (Diagonal).
+- <input type="checkbox" checked> Create Random Ship Position Generation (Diagonal).
 - <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox"> Remove permission to drag ships after starting the game.

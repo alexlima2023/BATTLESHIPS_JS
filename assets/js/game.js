@@ -356,17 +356,6 @@ function checkPositionIsEmpty(pos, arr) {
   return false;
 }
 
-//Support function for positioning the player's ships
-function deployPlayerShips() {
-  playerShips.forEach((el, index) => {
-    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
-    arr.forEach((el, index) => {
-      playerShips[index].style.opacity = '0.5';
-      shipArea[el].append(playerShips[index]);
-    });
-  });
-}
-
 //Generate random number range: (0-99)
 function randomNumber() {
   return Math.floor(Math.random() * 100);
@@ -524,6 +513,9 @@ function setCruiser(direction) {
       enemyShipArea[index].append(enemyCruiser1);
       enemyShipArea[index - 9].append(enemyCruiser2);
       enemyShipArea[index - 18].append(enemyCruiser3);
+      victoryPlayerArray.push(index);
+      victoryPlayerArray.push(index - 9);
+      victoryPlayerArray.push(index - 18);
       return true;
     }
     return setCruiser('diagonal');
@@ -646,32 +638,40 @@ function setAircraft(direction) {
 }
 ////Support function for positioning the enemy's ships
 function deployEnemyShips(difficulty) {
+  // enemyShipsArray[index].style.opacity = '0';
+  enemyShipsArray.forEach((el) => (el.style.opacity = '0'));
   if (difficulty === 'easy') {
+    createEasyLevel();
+    setVictoryPlayerArray();
     //Pick up level from the object.
-    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
-    victoryPlayerArray = arr;
+    // const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
+    // victoryPlayerArray = arr;
     //Function to created the ships in the table.
-    arr.forEach((el, index) => {
-      enemyShipsArray[index].style.opacity = '0';
-      enemyShipArea[el].append(enemyShipsArray[index]);
-    });
+    // arr.forEach((el, index) => {
+    //   enemyShipsArray[index].style.opacity = '0';
+    //   enemyShipArea[el].append(enemyShipsArray[index]);
+    // });
   }
   if (difficulty === 'medium') {
-    const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
-    victoryPlayerArray = arr;
-    arr.forEach((el, index) => {
-      enemyShipsArray[index].style.opacity = '0';
-      enemyShipArea[el].append(enemyShipsArray[index]);
-    });
+    createMediumLevel();
+    setVictoryPlayerArray();
+    // const arr = Object.values(Object.entries(levels)[1][1])[`${lvl}`];
+    // victoryPlayerArray = arr;
+    // arr.forEach((el, index) => {
+    //   enemyShipsArray[index].style.opacity = '0';
+    //   enemyShipArea[el].append(enemyShipsArray[index]);
+    // });
   }
 
   if (difficulty === 'hard') {
-    const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
-    victoryPlayerArray = arr;
-    arr.forEach((el, index) => {
-      enemyShipsArray[index].style.opacity = '0';
-      enemyShipArea[el].append(enemyShipsArray[index]);
-    });
+    createHardLevel();
+    setVictoryPlayerArray();
+    // const arr = Object.values(Object.entries(levels)[2][1])[`${lvl}`];
+    // victoryPlayerArray = arr;
+    // arr.forEach((el, index) => {
+    //   enemyShipsArray[index].style.opacity = '0';
+    //   enemyShipArea[el].append(enemyShipsArray[index]);
+    // });
   }
 }
 
@@ -731,6 +731,14 @@ function enemyAttackPlayerShip() {
   shipArea[position].style.backgroundColor = 'tomato';
   return shipArea[position].append(X);
 }
+//Function to generate a victoryPlayerArray
+function setVictoryPlayerArray() {
+  enemyShipArea.forEach((el, index) => {
+    if (!checkPositionIsEmpty(index, enemyShipArea)) {
+      victoryPlayerArray.push(index);
+    }
+  });
+}
 
 //Victory function: verifies that all elements of the ships' array are included within the motion array.
 function conditionVictory(arrMoves, arrCondition) {
@@ -742,7 +750,6 @@ function conditionVictory(arrMoves, arrCondition) {
 //Function to validate that all ships are ready to battle
 function startGame() {
   let count = 0;
-  // deployPlayerShips();
   playerMapBattle.forEach((el, index) => {
     if (!checkPositionIsEmpty(index, playerMapBattle)) {
       count++;
@@ -809,3 +816,14 @@ function enemyAtomicBombAttack() {
 //   enemyShipsArray[index].style.opacity = '1';
 //   enemyShipArea[el].append(enemyShipsArray[index]);
 // });
+
+//Support function for positioning the player's ships
+function deployPlayerShips() {
+  playerShips.forEach((el, index) => {
+    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
+    arr.forEach((el, index) => {
+      playerShips[index].style.opacity = '0.5';
+      shipArea[el].append(playerShips[index]);
+    });
+  });
+}
