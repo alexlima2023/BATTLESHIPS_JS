@@ -133,7 +133,7 @@ const aircraftBlockCellsDiagonal = [
   39,
 ];
 
-let soundIsActive = true;
+let soundIsActive = false;
 
 //GRIDS and HTML ELEMENTS
 
@@ -212,7 +212,7 @@ let explosionSound = new Audio();
 let pewPewSound = new Audio();
 let music = new Audio();
 music.loop = true;
-music.volume = 0.03;
+music.volume = 0.5;
 
 music.src = 'assets/sounds/music.mp3';
 dragAndDropSound.src = 'assets/sounds/mine.mp3';

@@ -31,9 +31,16 @@
 - <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox" checked> Remove permission to drag ships after starting the game.
-- <input type="checkbox"> Create Game Reset System.
+- <input type="checkbox" checked> Create Game Reset System.
 - <input type="checkbox"> Better computer intelligence at the medium and hard level
 
 ## Print 📸
 
+### V1
+
 <img src="assets/img/battleship-image.png">
+
+### V2
+
+<img src="assets/img/v2.png">
+<img src="assets/img/v2_battle.png">
