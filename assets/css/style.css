@@ -147,6 +147,14 @@ select {
   display: none;
 }
 
+.blue {
+  background-color: blue;
+}
+
+.tomato {
+  background-color: tomato;
+}
+
 .drag-over {
   border: dashed 3px red;
 }

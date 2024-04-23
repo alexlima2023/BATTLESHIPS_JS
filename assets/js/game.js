@@ -142,14 +142,19 @@ const playerAreaAttack = document.querySelectorAll('.player-attack');
 const playerPortArea = document.querySelectorAll('.port-area');
 const sectionPlayerPortArea = document.querySelector('#player_port_of_war');
 const playerMapBattle = document.querySelectorAll('.map-battle');
-const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
-const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
-const sectionEnemyPortArea = document.querySelector('#enemy-port-of-war');
-const battleArena = document.querySelector('#battle-area');
+
 const playerShotsScreen = document.querySelector('#player-shots');
 const playerTargetShotsScreen = document.querySelector('#player-target-shots');
+
+const enemyShipArea = document.querySelectorAll('.ship-enemy-area');
+const enemyPortArea = document.querySelectorAll('.enemy-port-area');
+const enemyAreaAttack = document.querySelectorAll('.enemy-attack');
+const sectionEnemyPortArea = document.querySelector('#enemy-port-of-war');
+
 const enemyShotsScreen = document.querySelector('#enemy-shots');
 const enemyTargetShotsScreen = document.querySelector('#enemy-target-shots');
+
+const battleArena = document.querySelector('#battle-area');
 
 //BUTTONS
 
@@ -214,7 +219,7 @@ dragAndDropSound.src = 'assets/sounds/mine.mp3';
 explosionSound.src = 'assets/sounds/explosion.mp3';
 pewPewSound.src = 'assets/sounds/pew-pew.mp3';
 
-music.play();
+// music.play();
 
 soundConfig.addEventListener('click', handleSound);
 
@@ -255,6 +260,8 @@ buttonRules.addEventListener('click', () =>
   ),
 );
 
+resetButton.addEventListener('click', resetGame);
+
 //Adding and Removing Click Events
 playerAreaAttack.forEach((el, index) => {
   const clickHandler = addClickEvent.bind(null, el, index);
@@ -285,7 +292,6 @@ playerShips.forEach((ship) => {
 
 function dragStart(e) {
   e.dataTransfer.setData('text/plain', e.target.id);
-  // e.target.style.opacity = '0.5';
 }
 
 shipArea.forEach((area) => {
@@ -637,7 +643,7 @@ function playerAttackEnemyShip(position) {
   if (conditionVictory(playerMoves, victoryPlayerArray)) {
     alert('Player Wins');
   }
-  playerAreaAttack[position].style.backgroundColor = 'tomato';
+  playerAreaAttack[position].classList.add('tomato');
   const X = document.createElement('div');
   X.innerText = 'X';
   X.classList.add('absolute');
@@ -648,12 +654,12 @@ function playerAttackEnemyShip(position) {
 
   if (checkPositionIsEmpty(position, enemyShipArea)) {
     countShots('playerMissedShot');
-    enemyShipArea[position].style.backgroundColor = 'blue';
+    enemyShipArea[position].classList.add('blue');
     pewPewSound.play();
     return enemyShipArea[position].append(O);
   }
   countShots('playerTargetShot');
-  enemyShipArea[position].style.backgroundColor = 'tomato';
+  enemyShipArea[position].classList.add('tomato');
   explosionSound.play();
   return enemyShipArea[position].append(X);
 }
@@ -676,15 +682,15 @@ function enemyAttackPlayerShip() {
   X.innerText = 'X';
   X.classList.add('absolute');
 
-  enemyAreaAttack[position].style.backgroundColor = 'tomato';
+  enemyAreaAttack[position].classList.add('tomato');
   if (checkPositionIsEmpty(position, shipArea)) {
     countShots('enemyMissedShot');
-    shipArea[position].style.backgroundColor = 'blue';
+    shipArea[position].classList.add('blue');
     return shipArea[position].append(O);
   }
   countShots('enemyTargetShot');
 
-  shipArea[position].style.backgroundColor = 'tomato';
+  shipArea[position].classList.add('tomato');
   return shipArea[position].append(X);
 }
 //Function to generate a victoryPlayerArray
@@ -751,12 +757,89 @@ function countShots(target) {
   }
 }
 
+function resetPortOfWar() {
+  const index = [0, 10, 11, 20, 21, 22, 30, 31, 32, 33, 40, 41, 42, 43, 44];
+  for (let i = 0; i < index.length; i++) {
+    playerPortArea[index[i]].append(playerShips[i]);
+    enemyPortArea[index[i]].append(enemyShipsArray[i]);
+    playerShips[i].style.opacity = '1';
+    playerShips[i].draggable = true;
+    playerShips[i].style.cursor = 'pointer';
+    enemyShipsArray[i].style.opacity = '1';
+  }
+}
+
+function resetStyleFromShipArea() {
+  enemyShipArea.forEach((el) => {
+    el.textContent = '';
+    el.classList.remove('blue');
+    el.classList.remove('tomato');
+  });
+  shipArea.forEach((el) => {
+    el.textContent = '';
+    el.classList.remove('blue');
+    el.classList.remove('tomato');
+  });
+}
+
+function resetShots() {
+  playerMissedShots = 0;
+  playerTargetShots = 0;
+  enemyMissedShots = 0;
+  enemyTargetShots = 0;
+  playerShotsScreen.textContent = 0;
+  playerTargetShotsScreen.textContent = 0;
+  enemyShotsScreen.textContent = 0;
+  enemyTargetShotsScreen.textContent = 0;
+}
+
+function resetGrids() {
+  battleArena.classList.add('hidden');
+  sectionPlayerPortArea.classList.remove('hidden');
+  sectionEnemyPortArea.classList.remove('hidden');
+}
+
+function resetAreaAttack() {
+  enemyAreaAttack.forEach((el) => {
+    el.classList.remove('tomato');
+  });
+  playerAreaAttack.forEach((el) => {
+    el.classList.remove('tomato');
+  });
+  playerAreaAttack.forEach((el, index) => {
+    removeClickEvent(el, index);
+  });
+  playerAreaAttack.forEach((el, index) => {
+    const clickHandler = addClickEvent.bind(null, el, index);
+    el.addEventListener('click', clickHandler);
+    clickHandlers.push(clickHandler);
+  });
+}
+
+function resetVariableArrays() {
+  victoryPlayerArray = [];
+  victoryEnemyArray = [];
+  playerMoves = [];
+  enemyMoves = [];
+}
+
+function resetGame() {
+  resetGrids();
+  resetShots();
+  resetVariableArrays();
+  resetAreaAttack();
+  resetStyleFromShipArea();
+  resetPortOfWar();
+}
+
+resetPortOfWar();
+
 //EXTRA
 //Atomic Bomb, destroy all player's ships.
 function enemyAtomicBombAttack() {
   for (let i = 0; i < 100; i++) {
     enemyMoves.push(i);
-    enemyAreaAttack[i].style.backgroundColor = 'tomato';
+    enemyAreaAttack[i].classList.add('tomato');
     if (checkPositionIsEmpty(i, shipArea)) {
       shipArea[i].append('O');
     } else {
@@ -766,25 +849,4 @@ function enemyAtomicBombAttack() {
   if (conditionVictory(enemyMoves, victoryEnemyArray)) {
     alert('Enemy Wins');
   }
-}
-
-// let arr = [90, 83, 93, 23, 14, 5, 38, 48, 58, 68, 20, 31, 42, 53, 64];
-// for (let i = 0; i < 100; i++) {
-//   enemyShipArea[i].textContent = i;
-// }
-
-// arr.forEach((el, index) => {
-//   enemyShipsArray[index].style.opacity = '1';
-//   enemyShipArea[el].append(enemyShipsArray[index]);
-// });
-
-//Support function for positioning the player's ships
-function deployPlayerShips() {
-  playerShips.forEach((el, index) => {
-    const arr = Object.values(Object.entries(levels)[0][1])[`${lvl}`];
-    arr.forEach((el, index) => {
-      playerShips[index].style.opacity = '0.5';
-      shipArea[el].append(playerShips[index]);
-    });
-  });
 }

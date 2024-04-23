@@ -30,8 +30,8 @@
 - <input type="checkbox" checked> Create Random Ship Position Generation (Diagonal).
 - <input type="checkbox" checked> Add Music and Sounds.
 - <input type="checkbox" checked> Add Music and Sounds.
-- <input type="checkbox"> Remove permission to drag ships after starting the game.
-- <input type="checkbox"> Create Game Restart System.
+- <input type="checkbox" checked> Remove permission to drag ships after starting the game.
+- <input type="checkbox"> Create Game Reset System.
 - <input type="checkbox"> Better computer intelligence at the medium and hard level
 
 ## Print 📸
