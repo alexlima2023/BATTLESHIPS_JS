@@ -12,6 +12,7 @@ let playerMoves = [];
 let enemyMoves = [];
 let playerShipsArray = [];
 let clickHandlers = [];
+
 const destroyerBlockCellsHorizontal = [9, 19, 29, 39, 49, 59, 69, 79, 89, 99];
 const cruiserBlockCellsHorizontal = [
   ...destroyerBlockCellsHorizontal,
@@ -134,6 +135,7 @@ const aircraftBlockCellsDiagonal = [
 ];
 
 let soundIsActive = false;
+let rulesPopUpIsActive = false;
 
 //GRIDS and HTML ELEMENTS
 
@@ -163,6 +165,9 @@ const buttonRules = document.querySelector('#rules');
 const sectionDifficulty = document.querySelectorAll('#difficulty');
 const soundConfig = document.querySelector('#sound-config');
 const resetButton = document.querySelector('#reset');
+const showShips = document.querySelector('#showEnemyShip');
+const enemyWins = document.querySelector('#enemyWins');
+const tips = document.querySelector('#tips');
 
 //PLAYER SHIPS
 const playerShips = Array.from(document.querySelectorAll('.ship'));
@@ -235,32 +240,33 @@ function handleSound() {
 }
 
 // GAME
+tips.addEventListener('click', () =>
+  alert(`Try calling the enemyAtomicBombAttack() function in console to make the computer win. 
+Try calling the showEnemyShips() function in console to see the positions of enemy ships on the map`),
+);
+
+alert(
+  `For a better view of the game, it is recommended to view this application in FULL HD resolution, we are working to 
+implement the responsibility that will be increased in the next versions of the game.`,
+);
 
 buttonPlay.addEventListener('click', startGame);
-buttonRules.addEventListener('click', () =>
+buttonRules.addEventListener('click', handleRulesPopUp);
+resetButton.addEventListener('click', () =>
   alert(
-    `Objective: The objective of Battleship is to sink all of your opponent's ships before they sink yours.
-    1. Setup: Each player has a game board with two grids: one for placing their own ships and one for recording their 
-    opponent's shots. Players must place their ships on the grid without the opponent seeing where they are located.
-    2. Ships: Each player has a fleet of ships, typically consisting of the following:
-    Aircraft Carrier (5 squares)
-    Battleship (4 squares)
-    Cruiser (3 squares)
-    Destroyer (2 squares)
-    Submarine (1 squares)
-    3. Taking Turns: Players take turns calling out coordinates to attempt to "hit" their opponent's ships. Coordinates 
-    are specified by a letter (indicating the row) and a number (indicating the column).
-    4. Hit or Miss: If a player calls out a coordinate that contains a part of an opponent's ship, it's a "hit." If the 
-    coordinate does not contain any part of a ship, it's a "miss." Players mark their opponent's grid accordingly.
-    5. Sinking Ships: When all of the squares of a ship have been hit, the ship is considered "sunk." The player must 
-    announce which ship has been sunk.
-    6. Winning the Game: The game continues until one player has successfully sunk all of their opponent's ships. That 
-    player is declared the winner.
-    `,
+    "We're working to implement this functionality! Reload the page to restart the game",
   ),
 );
 
-resetButton.addEventListener('click', resetGame);
+function handleRulesPopUp() {
+  console.log('aa');
+  if (rulesPopUpIsActive) {
+    rulesPopUp.classList.add('hidden');
+  } else {
+    rulesPopUp.classList.remove('hidden');
+  }
+  rulesPopUpIsActive = !rulesPopUpIsActive;
+}
 
 //Adding and Removing Click Events
 playerAreaAttack.forEach((el, index) => {
@@ -272,10 +278,10 @@ playerAreaAttack.forEach((el, index) => {
 function addClickEvent(el, index) {
   playerAttackEnemyShip(index);
   enemyAttackPlayerShip();
-  removeClickEvent(el, index);
+  removeClickEvent(index);
 }
 
-function removeClickEvent(el, index) {
+function removeClickEvent(index) {
   playerAreaAttack[index].removeEventListener('click', clickHandlers[index]);
 }
 
@@ -721,6 +727,7 @@ function startGame() {
 
   if (count === 15) {
     alert('Ready to game!');
+    tips.classList.remove('hidden');
     battleArena.classList.remove('hidden');
     sectionPlayerPortArea.classList.add('hidden');
     sectionEnemyPortArea.classList.add('hidden');
@@ -756,6 +763,8 @@ function countShots(target) {
     enemyTargetShotsScreen.textContent = enemyTargetShots;
   }
 }
+
+//Reset Implementation - Working....
 
 function resetPortOfWar() {
   const index = [0, 10, 11, 20, 21, 22, 30, 31, 32, 33, 40, 41, 42, 43, 44];
@@ -799,20 +808,12 @@ function resetGrids() {
   sectionEnemyPortArea.classList.remove('hidden');
 }
 
-function resetAreaAttack() {
+function resetStyleAreaAttack() {
   enemyAreaAttack.forEach((el) => {
     el.classList.remove('tomato');
   });
   playerAreaAttack.forEach((el) => {
     el.classList.remove('tomato');
-  });
-  playerAreaAttack.forEach((el, index) => {
-    removeClickEvent(el, index);
-  });
-  playerAreaAttack.forEach((el, index) => {
-    const clickHandler = addClickEvent.bind(null, el, index);
-    el.addEventListener('click', clickHandler);
-    clickHandlers.push(clickHandler);
   });
 }
 
@@ -827,7 +828,7 @@ function resetGame() {
   resetGrids();
   resetShots();
   resetVariableArrays();
-  resetAreaAttack();
+  resetStyleAreaAttack();
   resetStyleFromShipArea();
   resetPortOfWar();
 }
@@ -849,4 +850,8 @@ function enemyAtomicBombAttack() {
   if (conditionVictory(enemyMoves, victoryEnemyArray)) {
     alert('Enemy Wins');
   }
+}
+
+function showEnemyShips() {
+  enemyShipsArray.forEach((el) => (el.style.opacity = '0.5'));
 }

@@ -25,8 +25,8 @@
             </select>
             <button class="button-49" id="sound-config">SOUND: OFF</button>
             <div class="sound-volume">
-                <button class="sound-volume-bt">+</button>
-                <button class="sound-volume-bt">-</button>
+                <button class="sound-volume-bt newStyle">+</button>
+                <button class="sound-volume-bt newStyle">-</button>
             </div>
         </section>
     </header>
@@ -598,6 +598,7 @@
                 <h3 class="color-white bold">Target Shots: <span id="enemy-target-shots">0</span></h3>
                 <div class="shot target">X</div>
             </div>
+            
             <table id="enemy_map_battleship">
               <caption  class="color-white bold">Enemy Ships on the Map</caption>  
               <thead>
@@ -846,6 +847,34 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="flex">
+                <button id="tips" class="newStyle pd-10 hidden">Tips</button>
+            </div>
+        </section>
+        <section id="rulesPopUp" class="absolutePopUp hidden popUp">
+            <div class="absolute">X</div>
+            <h2>Rules</h2>
+            <h3>Objective:</h3>
+            <p>The objective of Battleship is to sink all of your opponent's ships before they sink yours.</p>
+            <ol>
+                <li>Setup: This game consists of a battle between the player's and the enemy's (computer) ships. For 
+                    the game to start, the player must move their ships from the war port to the player's map!</li>
+                <li>Ships: Each player has a fleet of ships, typically consisting of the following:
+                    Aircraft Carrier (5 squares)
+                    Battleship (4 squares)
+                    Cruiser (3 squares)
+                    Destroyer (2 squares)
+                    Submarine (1 square)</li>
+                <li>Taking Turns: Players take turns calling out coordinates to attempt to "hit" their opponent's ships. Coordinates 
+                    are specified by a letter (indicating the row) and a number (indicating the column).</li>
+                <li>Hit or Miss: If a player calls out a coordinate that contains a part of an opponent's ship, it's a "hit." If the 
+                    coordinate does not contain any part of a ship, it's a "miss." Players mark their opponent's grid accordingly.</li>
+                <li>Sinking Ships: When all of the squares of a ship have been hit, the ship is considered "sunk." The player must 
+                    announce which ship has been sunk.</li>
+                <li>Winning the Game: The game continues until one player has successfully sunk all of their opponent's ships. That 
+                    player is declared the winner.</li>
+                <img src="https://wiki.gla.com.br/images/0/0d/Laser_Navio.gif" alt="">
+            </ol>
         </section>
     </main>
     <footer>
